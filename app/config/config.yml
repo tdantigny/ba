@@ -83,6 +83,9 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: AppBundle\Core\Entity\Users
+    from_email:
+        address:        "contact@webeditionplanet.com"
+        sender_name:    "Bonne Augure"
 
 assetic:
     debug:          '%kernel.debug%'
