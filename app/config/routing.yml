@@ -1,0 +1,13 @@
+bo:
+    resource: "@AppBundle/Bo/Controller/"
+    type:     annotation
+
+fo:
+    resource: "@AppBundle/Fo/Controller/"
+    type:     annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

@@ -1,0 +1,6 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h2>{{ horoscope.title }}</h2>
+    <div>{{ horoscope.content | raw }}</div>
+{% endblock %}

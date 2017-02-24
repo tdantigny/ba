@@ -1,0 +1,15 @@
+assetic:
+    assets:
+        common_style:
+            inputs:
+                - '%kernel.root_dir%/Resources/public/css/header.css'
+                - '%kernel.root_dir%/Resources/public/css/footer.css'
+                - '%kernel.root_dir%/Resources/public/css/common.css'
+
+        user_js:
+            inputs:
+                - '%kernel.root_dir%/Resources/public/js/user.js'
+
+        guide_book_js:
+            inputs:
+                - '%kernel.root_dir%/Resources/public/js/guide_book.js'

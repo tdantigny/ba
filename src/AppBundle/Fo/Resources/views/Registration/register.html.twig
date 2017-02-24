@@ -1,0 +1,10 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    {{ form_start(form, {'method': 'post', 'action': path('fo_register'), 'attr': {'class': 'fo_register'}}) }}
+    {{ form_widget(form) }}
+        <div>
+            <input type="submit" value="S'inscrire" />
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

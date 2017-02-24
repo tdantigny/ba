@@ -1,0 +1,36 @@
+@import 'variable';
+
+header {
+    @media @mobile {
+        height: 40px;
+    }
+    @media @tablet {
+        height: 60px;
+    }
+    @media @desktop {
+        height: 80px;
+    }
+    @media @large-desktop {
+        height: 100px;
+    }
+}
+
+.navbar {
+    background-color: purple;
+}
+footer {
+    background-color: #E0B0FF;
+    bottom: 0;
+    height: 60px;
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+}
+a, a:hover, a:focus, a:visited {
+    text-decoration: none;
+    color: grey;
+}
+
+.showCursor {
+    cursor: pointer;
+}

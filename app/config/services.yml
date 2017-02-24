@@ -1,0 +1,27 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+#    parameter_name: value
+
+services:
+  login_success_handler:
+      class:  'AppBundle\Core\Handlers\LoginSuccessHandler'
+      arguments:  [ "@router", "@security.authorization_checker" ]
+      tags:
+          - { name: 'monolog.logger', channel: 'security' }
+
+  app_core_manager:
+      class:  'AppBundle\Core\Manager\Manager'
+      arguments:  [ '@doctrine.orm.entity_manager' ]
+
+  app_core_user:
+      class:  'AppBundle\Core\Services\User'
+      arguments:  [ '@doctrine.orm.entity_manager' ]
+
+  app_core_guide_book:
+      class: 'AppBundle\Core\Services\GuideBook'
+      arguments: [ '@doctrine.orm.entity_manager', '%directory_picture_guide_book%' ]
+
+  app_core_horosocope:
+        class: 'AppBundle\Core\Services\Horoscope'
+        arguments: [ '%url_horoscope%', '@snc_redis.default' ]

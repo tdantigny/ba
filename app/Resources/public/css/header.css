@@ -1,0 +1,20 @@
+@import 'variable';
+
+header {
+    @media @mobile {
+        height: 40px;
+    }
+    @media @tablet {
+        height: 60px;
+    }
+    @media @desktop {
+        height: 80px;
+    }
+    @media @large-desktop {
+        height: 100px;
+    }
+}
+
+.navbar {
+    background-color: purple;
+}

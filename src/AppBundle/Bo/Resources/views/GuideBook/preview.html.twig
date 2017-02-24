@@ -1,0 +1,9 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h1>{{ guideBook.title }}</h1>
+    <img src="/pictures/guide_book/{{ guideBook.picture }}" />
+    {% autoescape %}
+        {{ guideBook.html | raw }}
+    {% endautoescape %}
+{% endblock %}

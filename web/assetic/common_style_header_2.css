@@ -1,0 +1,9 @@
+@import 'variable';
+
+header {
+    @media (@screen-xs-max) { height: 40px; }
+}
+
+.navbar {
+    background-color: purple;
+}

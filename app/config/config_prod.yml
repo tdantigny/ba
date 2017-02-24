@@ -1,0 +1,29 @@
+imports:
+    - { resource: config.yml }
+
+#doctrine:
+#    orm:
+#        metadata_cache_driver: apc
+#        result_cache_driver: apc
+#        query_cache_driver: apc
+
+monolog:
+    handlers:
+        main:
+            type:         fingers_crossed
+            action_level: error
+            handler:      nested
+        nested:
+            type:  stream
+            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
+        console:
+            type:  console
+
+fos_js_routing:
+    cache_control:
+        # All are optional, defaults shown
+        public: false   # can be true (public) or false (private)
+        maxage: 3600    # integer value, e.g. 300
+        smaxage: 3600   # integer value, e.g. 300
+        vary: []        # string or array, e.g. "Cookie" or [ Cookie, Accept ]

@@ -1,0 +1,8 @@
+a, a:hover, a:focus, a:visited {
+    text-decoration: none;
+    color: grey;
+}
+
+.showCursor {
+    cursor: pointer;
+}

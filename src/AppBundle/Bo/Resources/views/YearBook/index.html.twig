@@ -1,0 +1,48 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    Liste des annuaires
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div>
+        <input type="submit" value="Filtrer" />
+    </div>
+    {{ form_end(form) }}
+
+    <a href="{{ path('bo_year_book_add') }}">Ajouter un annuaire</a>
+
+    {% if pagination is not empty %}
+        <div class="count">
+            {{ pagination.getTotalItemCount }}
+        </div>
+        <table class="table">
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination, 'Id', 'yb.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Nom', 'yb.name') }}</th>
+                <th>Détail</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Actif', 'yb.active') }}</th>
+            </tr>
+
+            {% for yearBook in pagination.items %}
+                <tr class="showCursor" onclick="document.location.href='{{ path('bo_year_book_detail', { yearBook : yearBook.id }) }}'">
+                    <td>{{ yearBook.id }}</td>
+                    <td>{{ yearBook.name }}</td>
+                    <td>Je ne sais pas trop</td>
+                    <td>
+                        {% if yearBook.active %}
+                            <i class="glyphicon glyphicon-ok"></i>
+                        {% else %}
+                            <i class="glyphicon glyphicon-remove"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        {# display navigation #}
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    {% endif %}
+{% endblock %}

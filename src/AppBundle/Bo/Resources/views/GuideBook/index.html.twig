@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    Liste des utilisateurs
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div>
+            <input type="submit" value="Filtrer" />
+        </div>
+    {{ form_end(form) }}
+
+    <a href="{{ path('bo_guide_book_add') }}">Ajouter un guide</a>
+
+    {% if pagination is not empty %}
+        <div class="count">
+            {{ pagination.getTotalItemCount }}
+        </div>
+        <table class="table">
+            <tr>
+                {# sorting of properties based on query components #}
+                <th>{{ knp_pagination_sortable(pagination, 'Id', 'gb.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Titre', 'gb.title') }}</th>
+                <th>Détail</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Actif', 'u.active') }}</th>
+            </tr>
+
+            {% for guideBook in pagination.items %}
+                <tr class="showCursor" onclick="document.location.href='{{ path('bo_guide_book_detail', { guideBook : guideBook.id }) }}'">
+                    <td>{{ guideBook.id }}</td>
+                    <td>{{ guideBook.title }}</td>
+                    <td>Je ne sais pas trop</td>
+                    <td>
+                        {% if guideBook.active %}
+                            <i class="glyphicon glyphicon-ok"></i>
+                        {% else %}
+                            <i class="glyphicon glyphicon-remove"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        {# display navigation #}
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    Liste des utilisateurs
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div>
+            <input type="submit" value="Filtrer" />
+        </div>
+    {{ form_end(form) }}
+
+    {% if pagination is not empty %}
+        <div class="count">
+            {{ pagination.getTotalItemCount }}
+        </div>
+        <table class="table">
+            <tr>
+                {# sorting of properties based on query components #}
+                <th>{{ knp_pagination_sortable(pagination, 'Id', 'u.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Email', 'u.email') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Nom', 'u.firstName') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Prenom', 'u.lastName') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Newsletter active', 'u.enableNewsletter') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Actif', 'u.enabled') }}</th>
+            </tr>
+
+            {% for user in pagination.items %}
+                <tr class="showCursor" onclick="document.location.href='{{ path('bo_user_detail', { user : user.id }) }}'">
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.firstName }}</td>
+                    <td>{{ user.lastName }}</td>
+                    <td>
+                        {% if user.enableNewsletter %}
+                            <i class="glyphicon glyphicon-ok"></i>
+                        {% else %}
+                            <i class="glyphicon glyphicon-remove"></i>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if user.enabled %}
+                            <i class="glyphicon glyphicon-ok"></i>
+                        {% else %}
+                            <i class="glyphicon glyphicon-remove"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        {# display navigation #}
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    {% endif %}
+{% endblock %}
