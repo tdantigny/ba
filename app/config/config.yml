@@ -90,8 +90,11 @@ fos_user:
 assetic:
     debug:          '%kernel.debug%'
     use_controller: '%kernel.debug%'
+    node: /usr/bin/node
     filters:
         cssrewrite: ~
+        less:
+           node_paths: [/usr/local/lib/node_modules]
 
 snc_redis:
     clients:
