@@ -29,6 +29,13 @@ class PaiementMethod
     private $name;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="active", type="boolean")
+     */
+    private $active;
+
+    /**
      * Get id
      *
      * @return int
@@ -45,7 +52,7 @@ class PaiementMethod
      *
      * @return PaiementMethod
      */
-    public function setComment($name)
+    public function setName($name)
     {
         $this->name = $name;
 
@@ -57,8 +64,32 @@ class PaiementMethod
      *
      * @return string
      */
-    public function getComment()
+    public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set active
+     *
+     * @param bool $active
+     *
+     * @return PaiementMethod
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Is active
+     *
+     * @return bool
+     */
+    public function isActive()
+    {
+        return $this->active;
     }
 }

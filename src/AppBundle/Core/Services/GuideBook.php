@@ -15,19 +15,19 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class GuideBook extends Manager
 {
     /**
-     * @var string
+     * @var UploadFile
      */
-    private $directoryPictures;
+    private $uploadFile;
 
     /**
      * GuideBook constructor.
      * @param EntityManager $entityManager
-     * @param string        $directoryPictures
+     * @param UploadFile    $uploadFile
      */
-    public function __construct(EntityManager $entityManager, string $directoryPictures)
+    public function __construct(EntityManager $entityManager, UploadFile $uploadFile)
     {
         parent::__construct($entityManager);
-        $this->directoryPictures = $directoryPictures;
+        $this->uploadFile = $uploadFile;
     }
 
     /**
@@ -37,7 +37,7 @@ class GuideBook extends Manager
      */
     public function createdGuideBook(GuideBookEntity $guideBook)
     {
-        $fileName = $this->updateFile($guideBook);
+        $fileName = $this->uploadFile->updateFile($guideBook->getPicture(), 'guide_book');
 
         $guideBook->setPicture($fileName);
         $guideBook->setHtml(html_entity_decode($guideBook->getHtml()));
@@ -80,28 +80,5 @@ class GuideBook extends Manager
         } catch (CustomException $customException) {
             throw new CustomException('Unable to remove this guide book');
         }
-    }
-
-    /**
-     * Update the picture for the guide book
-     *
-     * @param GuideBookEntity $guideBook
-     * @return string
-     */
-    private function updateFile(GuideBookEntity $guideBook)
-    {
-        /** @var UploadedFile $file */
-        $file = $guideBook->getPicture();
-
-        // Generate a unique name for the file before saving it
-        $fileName = md5(uniqid()).'.'.$file->guessExtension();
-
-        // Move the file to the directory where brochures are stored
-        $file->move(
-            $this->directoryPictures,
-            $fileName
-        );
-
-        return $fileName;
     }
 }

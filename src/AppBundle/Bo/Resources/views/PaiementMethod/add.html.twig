@@ -1,0 +1,14 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h2>Créer un moyen de paiement</h2>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div>
+            <input type="submit" value="Créer" />
+        </div>
+    {{ form_end(form) }}
+
+    <a href="{{ path('bo_paiement_method_list') }}">Annuler</a>
+{% endblock %}

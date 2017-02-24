@@ -89,14 +89,16 @@ class GuideBookController extends Controller
      */
     public function detailAction(Request $request, GuideBook $guideBook)
     {
-        $file = new File($this->getParameter('directory_picture_guide_book').$guideBook->getPicture());
+        $directoryPictures = $this->getParameter('directory_pictures');
+        $file = new File($directoryPictures['guide_book'].$guideBook->getPicture());
         $guideBook->setPicture($file);
         $form = $this->get('form.factory')->create(GuideBookType::class, $guideBook);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->get('app_core_guide_book')->createdGuideBook($guideBook);
+            die();
+            //$this->get('app_core_guide_book')->createdGuideBook($guideBook);
             $request->getSession()
                 ->getFlashBag()
                 ->add('success', 'Le guide à été modifié avec succès');

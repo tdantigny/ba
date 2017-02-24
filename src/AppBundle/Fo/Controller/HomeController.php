@@ -16,12 +16,13 @@ class HomeController extends Controller
     /**
      * @Route("/", name="fo_home")
      * @Method({"GET"})
+     * @param string $name
      * @return Response
      */
-    public function indexAction()
+    public function indexAction($name)
     {
         $this->get('login_success_handler');
 
-        return $this->render('Home/index.html.twig');
+        return $this->render('Home/index.html.twig', array('name' => $name));
     }
 }

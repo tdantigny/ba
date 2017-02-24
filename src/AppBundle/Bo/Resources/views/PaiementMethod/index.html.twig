@@ -1,0 +1,46 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    Liste des moyens de paiement
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div>
+        <input type="submit" value="Filtrer" />
+    </div>
+    {{ form_end(form) }}
+
+    <a href="{{ path('bo_paiement_method_add') }}">Ajouter un moyen de paiement</a>
+
+    {% if pagination is not empty %}
+        <div class="count">
+            {{ pagination.getTotalItemCount }}
+        </div>
+        <table class="table">
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination, 'Id', 'pm.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Nom', 'pm.name') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Active', 'pm.active') }}</th>
+            </tr>
+
+            {% for paiementMethod in pagination.items %}
+                <tr class="showCursor" onclick="document.location.href='{{ path('bo_paiement_method_detail', { paiementMethod : paiementMethod.id }) }}'">
+                    <td>{{ paiementMethod.id }}</td>
+                    <td>{{ paiementMethod.name }}</td>
+                    <td>
+                        {% if paiementMethod.active %}
+                            <i class="glyphicon glyphicon-ok"></i>
+                        {% else %}
+                            <i class="glyphicon glyphicon-remove"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        {# display navigation #}
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    {% endif %}
+{% endblock %}

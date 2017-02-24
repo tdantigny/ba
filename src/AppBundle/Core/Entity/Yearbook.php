@@ -2,7 +2,9 @@
 
 namespace AppBundle\Core\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Yearbook
@@ -40,7 +42,7 @@ class Yearbook
      *
      * @ORM\Column(name="click", type="integer")
      */
-    private $click;
+    private $click = 0;
 
     /**
      * @var string
@@ -52,9 +54,23 @@ class Yearbook
     /**
      * @var int
      *
-     * @ORM\Column(name="push", type="integer")
+     * @ORM\Column(name="push", type="integer", nullable=true)
      */
     private $push;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="picture", type="string", length=255)
+     */
+    private $picture;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="html", type="text")
+     */
+    private $html;
 
     /**
      * @var Users
@@ -92,6 +108,19 @@ class Yearbook
      * @ORM\Column(name="active", type="boolean")
      */
     private $active;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $paiementsMethod;
+
+    /**
+     * Yearbook constructor.
+     */
+    public function __construct()
+    {
+        $this->paiementsMethod = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -224,6 +253,54 @@ class Yearbook
     }
 
     /**
+     * Set picture
+     *
+     * @param string $picture
+     *
+     * @return Yearbook
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return string|UploadedFile
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    /**
+     * Set html
+     *
+     * @param string $html
+     *
+     * @return Yearbook
+     */
+    public function setHtml($html)
+    {
+        $this->html = $html;
+
+        return $this;
+    }
+
+    /**
+     * Get html
+     *
+     * @return string
+     */
+    public function getHtml()
+    {
+        return $this->html;
+    }
+
+    /**
      * Set creationUser
      *
      * @param Users $creationUser
@@ -341,5 +418,27 @@ class Yearbook
     public function getActive()
     {
         return $this->active;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getPaiementsMethod()
+    {
+        return $this->paiementsMethod;
+    }
+
+    /**
+     * Set paiementsMethod
+     *
+     * @param ArrayCollection $paiementsMethod
+     *
+     * @return Yearbook
+     */
+    public function setPaiementsMethod($paiementsMethod)
+    {
+        $this->paiementsMethod = $paiementsMethod;
+
+        return $this;
     }
 }

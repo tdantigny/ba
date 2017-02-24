@@ -1,7 +1,6 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    dd
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
         Bienvenue {{ app.user.lastName }} {{ app.user.firstName }}
     {% endif %}
