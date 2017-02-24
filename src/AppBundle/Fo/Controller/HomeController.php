@@ -19,10 +19,10 @@ class HomeController extends Controller
      * @param string $name
      * @return Response
      */
-    public function indexAction($name)
+    public function indexAction()
     {
         $this->get('login_success_handler');
 
-        return $this->render('Home/index.html.twig', array('name' => $name));
+        return $this->render('Home/index.html.twig');
     }
 }

@@ -2,3 +2,5 @@
 /web
 /var
 /.idea
+/logs
+app/config/parameters.yml
