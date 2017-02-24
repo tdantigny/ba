@@ -5,6 +5,7 @@ namespace AppBundle\Core\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity
@@ -63,7 +64,7 @@ class Users extends BaseUser
 
     /**
      * @var \DateTime
-     * @ORM\Column(name="creation_date", type="date")
+     * @ORM\Column(name="birth_date", type="date")
      */
     private $birthDate;
 
@@ -86,11 +87,18 @@ class Users extends BaseUser
     private $enableNewsletter = false;
 
     /**
+     * @var \DateTime
+     * @ORM\Column(name="creation_date", type="date")
+     */
+    private $creationDate;
+
+    /**
      * Users constructor.
      */
     public function __construct()
     {
         parent::__construct();
+        $this->setCreationDate(new \DateTime());
     }
 
     /**
