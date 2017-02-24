@@ -2,6 +2,7 @@
 
 namespace AppBundle\Bo\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -27,9 +28,14 @@ class YearBookType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nom',
             ])
-            ->add('slogan', CheckboxType::class, [
+            ->add('active', CheckboxType::class, [
+                'label' => 'Actif',
+            ])
+            ->add('slogan', TextType::class, [
                 'label' => 'Slogan',
-                'required' => false,
+            ])
+            ->add('url', TextType::class, [
+                'label' => 'Url du site',
             ])
             ->add('picture', FileType::class, [
                 'label' => 'Image',
@@ -41,12 +47,12 @@ class YearBookType extends AbstractType
                     'data-theme' => 'bbcode', // Skip it if you want to use default theme
                 ],
             ])
-            ->add('html', TextareaType::class, [
-                'label' => 'Contenu du guide',
-                'attr' => [
-                    'class' => 'tinymce',
-                    'data-theme' => 'bbcode', // Skip it if you want to use default theme
-                ],
+            ->add('paiementsMethod', EntityType::class, [
+                'label' => 'Moyens de paiement',
+                'class' => 'AppBundle:PaiementMethod',
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
             ]);
     }
 

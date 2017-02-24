@@ -42,7 +42,7 @@ class Horoscope
      * @param array $urlsHorosocope
      * @param Redis $redis
      */
-    public function __construct(array $urlsHorosocope, $redis)
+    public function __construct(array $urlsHorosocope, Redis $redis)
     {
         $this->urlsHorosocope = $urlsHorosocope;
         $this->redis = $redis;

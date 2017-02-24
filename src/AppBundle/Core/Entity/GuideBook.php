@@ -3,6 +3,7 @@
 namespace AppBundle\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * GuideBook
@@ -101,7 +102,7 @@ class GuideBook
     /**
      * Get picture
      *
-     * @return string
+     * @return string|UploadedFile
      */
     public function getPicture()
     {

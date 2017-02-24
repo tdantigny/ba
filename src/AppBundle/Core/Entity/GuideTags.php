@@ -1,8 +1,7 @@
 <?php
 
-namespace AppBundle\Core\Entity\Core\Entity;
+namespace AppBundle\Core\Entity;
 
-use AppBundle\Core\Entity\GuideBook;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

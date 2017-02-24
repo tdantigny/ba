@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    {{ tinymce_init() }}
+    <h2>Modifier un annuaire</h2>
+
+    {{ form_start(form) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.active) }}
+    {{ form_row(form.picture) }}
+    <img src="/pictures/year_book/{{ yearBook.picture.filename }}" />
+    {{ form_rest(form) }}
+    <div>
+        <input type="submit" value="Modifier" />
+    </div>
+    {{ form_end(form) }}
+
+    <button id="delete-guidebook" data-id="{{ yearBook.id }}">Supprimer</button>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h2>Modifier un moyen de paiement</h2>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div>
+        <input type="submit" value="Modifier" />
+    </div>
+    {{ form_end(form) }}
+
+    <button id="delete-guidebook" data-id="{{ paiementMethod.id }}">Supprimer</button>
+{% endblock %}

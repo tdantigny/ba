@@ -5,12 +5,12 @@
     <h2>Modifier un guide</h2>
 
     {{ form_start(form) }}
-    {{ form_widget(form.title) }}
-    {{ form_widget(form.active) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.active) }}
     {{ form_label(form.picture) }}
     <img src="/pictures/guide_book/{{ guideBook.picture.filename }}" />
     {{ form_widget(form.picture) }}
-    {{ form_widget(form.html) }}
+    {{ form_row(form.html) }}
     <div>
         <input type="submit" value="Modifier" />
     </div>

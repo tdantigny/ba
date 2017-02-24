@@ -16,6 +16,7 @@ class HomeController extends Controller
     /**
      * @Route("/", name="fo_home")
      * @Method({"GET"})
+     * @param string $name
      * @return Response
      */
     public function indexAction()

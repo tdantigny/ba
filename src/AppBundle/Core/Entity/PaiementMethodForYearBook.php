@@ -78,7 +78,7 @@ class PaiementMethodForYearBook
      *
      * @return PaiementMethodForYearBook
      */
-    public function setUser($paiementMethod)
+    public function setPaiementMethod($paiementMethod)
     {
         $this->paiementMethod = $paiementMethod;
 

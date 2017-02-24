@@ -2,7 +2,7 @@ assetic:
     assets:
         common_style:
             inputs:
-                - '%kernel.root_dir%/Resources/public/css/header.css'
+                - '%kernel.root_dir%/Resources/public/css/header.less'
                 - '%kernel.root_dir%/Resources/public/css/footer.css'
                 - '%kernel.root_dir%/Resources/public/css/common.css'
 
