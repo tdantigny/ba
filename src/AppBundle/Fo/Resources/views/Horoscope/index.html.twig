@@ -1,9 +1,9 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <ul>
-        {% for sign in listSign %}
-            <li><a href="{{ path('fo_horoscope_by_type', { type : sign }) }}">{{ sign | title }}</a></li>
-        {% endfor %}
-    </ul>
+    {% for horoscope in horoscopes %}
+        <a href="{{ path('fo_horoscope_by_type', { type : horoscope.type }) }}">
+            <img style="width: 5%" src="/pictures/logo_horoscope/{{ horoscope.pictureSecondary }}">
+        </a>
+    {% endfor %}
 {% endblock %}

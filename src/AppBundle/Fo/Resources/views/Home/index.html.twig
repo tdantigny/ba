@@ -4,4 +4,7 @@
     {% if guideBook is not empty %}
         {% include 'Home/partials/guide-book.html.twig' with { 'guideBook' : guideBook } %}
     {% endif %}
+    {% if horoscope is not empty %}
+        {% include 'Home/partials/horoscope.html.twig' with { 'horoscope' : horoscope } %}
+    {% endif %}
 {% endblock %}

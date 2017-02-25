@@ -29,6 +29,16 @@ class Horoscope
     private $type;
 
     /**
+     * @var string
+     */
+    private $picturePrimary;
+
+    /**
+     * @var string
+     */
+    private $pictureSecondary;
+
+    /**
      * Horoscope constructor.
      */
     public function __construct()
@@ -38,7 +48,7 @@ class Horoscope
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
@@ -46,7 +56,7 @@ class Horoscope
     /**
      * @param string $title
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
@@ -54,7 +64,7 @@ class Horoscope
     /**
      * @return \DateTime
      */
-    public function getDate()
+    public function getDate(): \DateTime
     {
         return $this->date;
     }
@@ -62,7 +72,7 @@ class Horoscope
     /**
      * @param \DateTime $date
      */
-    public function setDate($date)
+    public function setDate(\DateTime $date)
     {
         $this->date = $date;
     }
@@ -70,7 +80,7 @@ class Horoscope
     /**
      * @return string
      */
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }
@@ -78,7 +88,7 @@ class Horoscope
     /**
      * @param string $content
      */
-    public function setContent($content)
+    public function setContent(string $content)
     {
         $this->content = $content;
     }
@@ -86,7 +96,7 @@ class Horoscope
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
@@ -94,8 +104,40 @@ class Horoscope
     /**
      * @param string $type
      */
-    public function setType($type)
+    public function setType(string $type)
     {
         $this->type = $type;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPicturePrimary(): string
+    {
+        return $this->picturePrimary;
+    }
+
+    /**
+     * @param string $picturePrimary
+     */
+    public function setPicturePrimary(string $picturePrimary)
+    {
+        $this->picturePrimary = $picturePrimary;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPictureSecondary(): string
+    {
+        return $this->pictureSecondary;
+    }
+
+    /**
+     * @param string $pictureSecondary
+     */
+    public function setPictureSecondary(string $pictureSecondary)
+    {
+        $this->pictureSecondary = $pictureSecondary;
     }
 }
