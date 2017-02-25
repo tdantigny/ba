@@ -112,7 +112,6 @@ class GuideBookController extends Controller
         ]);
     }
 
-
     /**
      * @Route("/previsualisation/{guideBook}", name="bo_guide_book_preview")
      * @param Request   $request
