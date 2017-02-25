@@ -1,6 +1,8 @@
 @import 'variable.less';
 
-header {
+.header {
+    background-color: @primary-color;
+
     @media @mobile {
         height: 40px;
     }
@@ -11,10 +13,51 @@ header {
         height: 80px;
     }
     @media @large-desktop {
-        height: 100px;
+        height: 84px;
     }
 }
 
-.navbar {
-    background-color: @primary-color;
+.header__logo {
+    padding: 10px 0;
+    height:100%;
+}
+
+.header__logo__img {
+    height:100%;
+}
+
+.header__navigation {
+    height: 20px;
+    margin-top: 32px;
+}
+
+.header__navigation__list {
+    float: left;
+}
+
+.header__navigation__list__element {
+    float: left;
+    display: inline;
+    list-style-type: none;
+    padding: 0 10px;
+}
+
+.header__navigation__list__element--actif {
+
+}
+
+
+.header__account__list {
+    float: right;
+}
+
+.header__account__list__element {
+    float: left;
+    display: inline;
+    list-style-type: none;
+    padding: 0 10px;
+}
+
+.header__account__list__element--actif {
+
 }
