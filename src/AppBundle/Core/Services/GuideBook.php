@@ -85,7 +85,7 @@ class GuideBook extends Manager
     /**
      * Return a random guid book according to the day
      *
-     * @return GuideBookEntity
+     * @return GuideBookEntity|null
      */
     public function getRandomOne()
     {
@@ -95,6 +95,11 @@ class GuideBook extends Manager
                     'active' => true,
                 ]
             );
+
+        if (empty($allActiveGuideBook)) {
+            return null;
+        }
+
         $todayDate = new \DateTime();
         $todayDay = (int) $todayDate->format('d');
         $guideKey = $todayDay % count($allActiveGuideBook);
