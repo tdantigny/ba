@@ -1,8 +1,15 @@
 /vendor
-/web
 /var
 /.idea
 /logs
 app/config/parameters.yml
 /node_modules
 web/config.php
+web/assetic
+web/assets
+web/bundles
+web/css
+web/guide_book
+web/js
+web/pictures/guide_book
+web/year_book
