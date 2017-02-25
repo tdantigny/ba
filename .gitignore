@@ -4,3 +4,5 @@
 /.idea
 /logs
 app/config/parameters.yml
+/node_modules
+web/config.php

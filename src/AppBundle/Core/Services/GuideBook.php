@@ -81,4 +81,24 @@ class GuideBook extends Manager
             throw new CustomException('Unable to remove this guide book');
         }
     }
+
+    /**
+     * Return a random guid book according to the day
+     *
+     * @return GuideBookEntity
+     */
+    public function getRandomOne()
+    {
+        $allActiveGuideBook = $this->getEntityManager()->getRepository('AppBundle:GuideBook')
+            ->findBy(
+                [
+                    'active' => true,
+                ]
+            );
+        $todayDate = new \DateTime();
+        $todayDay = (int) $todayDate->format('d');
+        $guideKey = $todayDay % count($allActiveGuideBook);
+
+        return $allActiveGuideBook[$guideKey];
+    }
 }
