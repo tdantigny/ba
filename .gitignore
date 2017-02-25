@@ -1,5 +1,11 @@
 /vendor
-/web
+web/assetic
+web/js
+web/css
+web/assets
+web/bundles
+web/guide_book
+web/year_book
 /var
 /.idea
 /logs
