@@ -20,6 +20,15 @@ monolog:
         console:
             type:  console
 
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    node: /usr/bin/node
+    filters:
+        cssrewrite: ~
+        less:
+           node_paths: [/usr/lib/node_modules]
+
 fos_js_routing:
     cache_control:
         # All are optional, defaults shown
