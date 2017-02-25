@@ -1,8 +1,40 @@
-a, a:hover, a:focus, a:visited {
-    text-decoration: none;
-    color: grey;
+@import 'variable.less';
+
+body {
+    font-size:13px;
+    font-family: 'Open Sans', sans-serif;
 }
 
-.showCursor {
+.button1 {
+    border:1px #A37AB6 solid;
+    border-color: #A37AB6;
+    color: #A37AB6;
+    text-transform: uppercase;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 10px ;
+}
+
+.button1:hover {
+    border:1px @primary-color solid;
+    border-color: @primary-color;
+    color: @primary-color;
     cursor: pointer;
+    text-decoration: none;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.no-padding {
+    padding:0;
+}
+
+.title1 {
+    text-transform: uppercase;
+    text-align:center;
+    color: #A37AB6;
+    font-weight: 700;
+    margin: 10px 0 20px;
 }

@@ -5,6 +5,7 @@ assetic:
                 - '%kernel.root_dir%/Resources/public/css/header.less'
                 - '%kernel.root_dir%/Resources/public/css/footer.less'
                 - '%kernel.root_dir%/Resources/public/css/common.less'
+                - '%kernel.root_dir%/../src/AppBundle/Fo/Resources/public/css/home.less'
 
         user_js:
             inputs:

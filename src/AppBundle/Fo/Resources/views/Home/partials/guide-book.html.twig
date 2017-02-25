@@ -1,0 +1,19 @@
+<section class="partial__guideBook">
+    <div class="partial__guideBook__background">
+        <img class="partial__guideBook__background__img" src="/pictures/guide_book/{{ guideBook.picture }}" alt="{{ guideBook.title }}" />
+    </div>
+
+    <article class="partial__guideBook__article">
+        <p class="partial__guideBook__article__today">aujourd'hui</p>
+        <hr class="partial__guideBook__article__bar">
+        <h3 class="title1">{{ guideBook.title }}</h3>
+        <div class="partial__guideBook__article__text">
+        {% autoescape %}
+            {{ guideBook.html | raw }}
+        {% endautoescape %}
+        </div>
+        <p class="text-center">
+            <a class="button1" title="voir {{ guideBook.title }}" href="{{ path('fo_guide_book', { 'guideBook' : guideBook.id, 'title' : guideBook.title }) }}">consulter</a>
+        </p>
+    </article>
+</section>

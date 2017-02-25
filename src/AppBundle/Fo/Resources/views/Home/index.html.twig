@@ -2,9 +2,6 @@
 
 {% block body %}
     {% if guideBook is not empty %}
-        {% include ':partials:guide-book.html.twig' with { 'guideBook' : guideBook } %}
-    {% endif %}
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        Bienvenue {{ app.user.lastName }} {{ app.user.firstName }}
+        {% include 'Home/partials/guide-book.html.twig' with { 'guideBook' : guideBook } %}
     {% endif %}
 {% endblock %}
