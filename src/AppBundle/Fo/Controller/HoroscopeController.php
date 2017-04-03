@@ -23,14 +23,15 @@ class HoroscopeController extends Controller
         $listSign = [];
         try {
             foreach ($this->getParameter('url_horoscope') as $key => $value) {
-                $listSign[] = $this->get('app_core_horosocope')->getTypeEnglishToFrench($key);
+                $type = $this->get('app_core_horosocope_dictionnary')->getTypeEnglishToFrench($key);
+                $listSign[] = $this->get('app_core_horosocope')->getByType($type);
             }
         } catch (CustomException $customException) {
             throw new CustomException($customException->getMessage(), 500);
         }
 
         return $this->render('Horoscope/index.html.twig', [
-            'listSign' => $listSign,
+            'horoscopes' => $listSign,
         ]);
     }
 

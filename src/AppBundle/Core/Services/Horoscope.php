@@ -14,23 +14,11 @@ use Snc\RedisBundle\Client\Phpredis\Client as Redis;
 class Horoscope
 {
     const LIFETIME = 86400;
-    const BELIER = 'aries';
-    const TAUREAU = 'taurus';
-    const GEMEAU = 'gemini';
-    const CANCER = 'cancer';
-    const LION = 'lion';
-    const VIERGE = 'virgin';
-    const BALANCE = 'balance';
-    const SCORPION = 'scorpio';
-    const SAGITTAIRE = 'sagittarius';
-    const CAPRICORNE = 'capricorn';
-    const VERSEAU = 'aquarius';
-    const POISSONS = 'pisces';
 
     /**
-     * @var array
+     * @var HoroscopeDictionnary
      */
-    private $urlsHorosocope;
+    private $horoscopeDictionnary;
 
     /**
      * @var Redis
@@ -39,12 +27,12 @@ class Horoscope
 
     /**
      * Horoscope constructor.
-     * @param array $urlsHorosocope
-     * @param Redis $redis
+     * @param HoroscopeDictionnary $horoscopeDictionnary
+     * @param Redis                $redis
      */
-    public function __construct(array $urlsHorosocope, Redis $redis)
+    public function __construct(HoroscopeDictionnary $horoscopeDictionnary, Redis $redis)
     {
-        $this->urlsHorosocope = $urlsHorosocope;
+        $this->horoscopeDictionnary = $horoscopeDictionnary;
         $this->redis = $redis;
     }
 
@@ -63,7 +51,7 @@ class Horoscope
         }
 
         try {
-            $urlHoroscope = $this->getTypeFrenchToEnglish($type);
+            $urlHoroscope = $this->horoscopeDictionnary->getUrlFromFrenchType($type);
             $modelHoroscope = $this->getXml($urlHoroscope, $type);
         } catch (CustomException $customException) {
             throw new CustomException('Impossible de récupérer les horoscopes : code '.$customException->getCode().'.', -1);
@@ -75,135 +63,32 @@ class Horoscope
     }
 
     /**
-     * Convert type name in french
+     * Get a random horosocope
      *
-     * @param string $type
-     * @return string
-     * @throws CustomException
+     * @return HoroscopeModel
      */
-    public function getTypeEnglishToFrench(string $type)
+    public function getRandomOne()
     {
-        switch ($type) {
-            case self::BELIER:
-                $url = 'belier';
-                break;
+        $allType = $this->horoscopeDictionnary->getAllType();
+        $randomKeyType = rand(0, 11);
+        $frenchType = $this->horoscopeDictionnary->getTypeEnglishToFrench($allType[$randomKeyType]);
 
-            case self::TAUREAU:
-                $url = 'taureau';
-                break;
-
-            case self::GEMEAU:
-                $url = 'gemeau';
-                break;
-
-            case self::CANCER:
-                $url = 'cancer';
-                break;
-
-            case self::LION:
-                $url = 'lion';
-                break;
-
-            case self::VIERGE:
-                $url = 'vierge';
-                break;
-
-            case self::BALANCE:
-                $url = 'balance';
-                break;
-
-            case self::SCORPION:
-                $url = 'scorpion';
-                break;
-
-            case self::SAGITTAIRE:
-                $url = 'sagittaire';
-                break;
-
-            case self::CAPRICORNE:
-                $url = 'capricorne';
-                break;
-
-            case self::VERSEAU:
-                $url = 'verseau';
-                break;
-
-            case self::POISSONS:
-                $url = 'poissons';
-                break;
-
-            default:
-                throw new CustomException('Type not found', 0);
-                break;
-        }
-
-        return $url;
+        return $this->getByType($frenchType);
     }
 
     /**
-     * Convert type name in english
+     * Get the daily horoscope to the current user
      *
-     * @param string $type
-     * @return string
-     * @throws CustomException
+     * @param \DateTime $birthDate
+     * @return HoroscopeModel
      */
-    private function getTypeFrenchToEnglish(string $type)
+    public function getByBirthDate(\DateTime $birthDate)
     {
-        switch ($type) {
-            case 'belier':
-                $url = $this->urlsHorosocope[self::BELIER];
-                break;
+        $type = $this->horoscopeDictionnary->getTypeByDate($birthDate);
 
-            case 'taureau':
-                $url = $this->urlsHorosocope[self::TAUREAU];
-                break;
+        $frenchType = $this->horoscopeDictionnary->getTypeEnglishToFrench($type);
 
-            case 'gemeau':
-                $url = $this->urlsHorosocope[self::GEMEAU];
-                break;
-
-            case 'cancer':
-                $url = $this->urlsHorosocope[self::CANCER];
-                break;
-
-            case 'lion':
-                $url = $this->urlsHorosocope[self::LION];
-                break;
-
-            case 'vierge':
-                $url = $this->urlsHorosocope[self::VIERGE];
-                break;
-
-            case 'balance':
-                $url = $this->urlsHorosocope[self::BALANCE];
-                break;
-
-            case 'scorpion':
-                $url = $this->urlsHorosocope[self::SCORPION];
-                break;
-
-            case 'sagittaire':
-                $url = $this->urlsHorosocope[self::SAGITTAIRE];
-                break;
-
-            case 'capricorne':
-                $url = $this->urlsHorosocope[self::CAPRICORNE];
-                break;
-
-            case 'verseau':
-                $url = $this->urlsHorosocope[self::VERSEAU];
-                break;
-
-            case 'poissons':
-                $url = $this->urlsHorosocope[self::POISSONS];
-                break;
-
-            default:
-                throw new CustomException('Type not found', 0);
-                break;
-        }
-
-        return $url;
+        return $this->getByType($frenchType);
     }
 
     /**
@@ -226,9 +111,15 @@ class Horoscope
         }
 
         $horoscopeModel->setTitle($content[0][0]);
-        $horoscopeModel->setContent($content[0][3]);
+        $horoscopeModel->setContent($this->cleanContent($content[0][3]));
         $horoscopeModel->setDate(new \DateTime($content[0][4]));
         $horoscopeModel->setType($content[0][6]);
+        $horoscopeModel->setPicturePrimary(
+            $this->horoscopeDictionnary->getTypeFrenchToEnglish($content[0][6]).'_primary.png'
+        );
+        $horoscopeModel->setPictureSecondary(
+            $this->horoscopeDictionnary->getTypeFrenchToEnglish($content[0][6]).'_secondary.png'
+        );
 
         return $horoscopeModel;
     }
@@ -269,5 +160,35 @@ class Horoscope
         $content[0][] = $typeHorosocpe;
 
         return $this->construcModel($content);
+    }
+
+    /**
+     *
+     *
+     * @param string $content
+     * @return string
+     */
+    private function cleanContent(string $content)
+    {
+        $cleanContent = preg_replace('#\\n*#', '', $content);
+        $cleanContent = preg_replace('#^<br\/>#', '', $cleanContent);
+        $cleanContent = preg_replace('#<center><a.*<\/center>#', '', $cleanContent);
+        $cleanContent = preg_replace('#<center>.*<\/center>#', '', $cleanContent);
+        $cleanContent = preg_replace('#^<br><br>#', '', $cleanContent);
+        $explodeContent = explode('Horoscope', $cleanContent);
+
+        foreach ($explodeContent as $key => $truncateContent) {
+            if (false !== strpos($truncateContent, 'Argent')
+                || false !== strpos($truncateContent, 'Vie sociale')
+                || false !== strpos($truncateContent, 'Famille')
+                || false !== strpos($truncateContent, 'Nombre de chance')
+                || false !== strpos($truncateContent, 'Citation du jour')
+                || false !== strpos($truncateContent, 'Clin d\'oeil')
+            ) {
+                unset($explodeContent[$key]);
+            }
+        }
+
+        return implode('Horoscope', $explodeContent);
     }
 }

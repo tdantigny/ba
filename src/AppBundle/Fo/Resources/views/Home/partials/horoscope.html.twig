@@ -1,0 +1,9 @@
+<section>
+<p>Découvrez aujourd'hui / {{ "now"|date('d.m.Y') }}</p>
+<h3>Votre horoscope du jour</h3>
+<article>
+    {{ horoscope.content|raw }}
+</article>
+<img src="/pictures/logo_horoscope/{{ horoscope.pictureSecondary }}">
+<a href="{{ path('fo_horoscope_by_type', { 'type' : horoscope.title }) }}">EN SAVOIR PLUS</a>
+</section>

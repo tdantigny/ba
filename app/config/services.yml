@@ -36,4 +36,8 @@ services:
 
   app_core_horosocope:
         class: 'AppBundle\Core\Services\Horoscope'
-        arguments: [ '%url_horoscope%', '@snc_redis.default' ]
+        arguments: [ '@app_core_horosocope_dictionnary', '@snc_redis.default' ]
+
+  app_core_horosocope_dictionnary:
+          class: 'AppBundle\Core\Services\HoroscopeDictionnary'
+          arguments: [ '%url_horoscope%', '%horoscope_period%' ]
