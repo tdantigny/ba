@@ -4,4 +4,7 @@
     {% if guideBook is not empty %}
         {% include 'Home/partials/guide-book.html.twig' with { 'guideBook' : guideBook } %}
     {% endif %}
+
+
+    {% include 'Home/partials/registration-newsletter.html.twig' with { 'guideBook' : guideBook } %}
 {% endblock %}

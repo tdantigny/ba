@@ -1,15 +1,18 @@
 @import 'variable.less';
 
-.footer {
-    background-color: @secondary-color;
+footer {
     height: 30px;
     line-height: 30px;
     text-align: center;
-    color: #fff;
 }
 
 .footer__link:visited,
 .footer__link:focus,
 .footer__link:hover {
-    color: #fff;
+    color: @primary-color;
+}
+
+footer a {
+    color: @primary-color;
+    padding: 0 10px;
 }

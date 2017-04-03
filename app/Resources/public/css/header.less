@@ -1,62 +1,98 @@
 @import 'variable.less';
 
-.header {
-    background-color: @primary-color;
+header {
+    background: #ffffff;
+}
 
-    @media @mobile {
-        height: 40px;
-    }
-    @media @tablet {
-        height: 60px;
-    }
-    @media @desktop {
-        height: 80px;
-    }
-    @media @large-desktop {
-        height: 84px;
-    }
+header > div {
+    padding: 10px 0;
+}
+
+.header__line {
+    margin: 0;
+    background-color: @primary-color;
+    height: 4px;
+    width: 100%;
 }
 
 .header__logo {
-    padding: 10px 0;
-    height:100%;
-}
-
-.header__logo__img {
-    height:100%;
-}
-
-.header__navigation {
-    height: 20px;
-    margin-top: 32px;
-}
-
-.header__navigation__list {
     float: left;
+    margin: 0;
+    margin-right: 30px;
 }
 
-.header__navigation__list__element {
-    float: left;
-    display: inline;
-    list-style-type: none;
+.header__logo img{
+    height: 50px;
+}
+
+.header__nav {
+    width: 100%;
+    margin: 10px 0 0;
+    @media @mobile {
+        display:none;
+        clear: both;
+        padding-top: 10px;
+    }
+}
+
+.header__nav--mobile-actif {
+    display:block;
+}
+
+.header__nav__site {
+    @media @mobile, @tablet, @desktop {
+        display: block;
+        width:100%;
+    }
+}
+
+.header__nav__site li {
+    float:left;
     padding: 0 10px;
+    text-align: center;
+    @media @mobile {
+        float: none;
+        display: block;
+        text-align: left;
+        padding: 5px 0;
+    }
 }
 
-.header__navigation__list__element--actif {
-
+.header__nav__site li a {
+    font-size: 16px;
+    color: @primary-color;
 }
 
-.header__account__list {
-    float: right;
+.header__nav__site li.actif a {
+    color: @tertiaire-color;
 }
 
-.header__account__list__element {
-    float: left;
-    display: inline;
-    list-style-type: none;
-    padding: 0 10px;
+.header__nav__site li a:hover {
+    font-size: 16px;
+    text-decoration: none;
+    color: @secondary-color;
 }
 
-.header__account__list__element--actif {
+.header__nav__account {
+    float:right;
+    @media @mobile, @tablet {
+        display: block;
+        width:100%;
+        text-align: center;
+        clear: both;
+        margin-top: 10px;
+    }
+}
 
+.header__menu-hamburger {
+    float:right;
+}
+
+.header__menu-hamburger span {
+    display: none;
+    font-size: 26px;
+    color: @primary-color;
+    @media @mobile {
+        display: block;
+    }
 }

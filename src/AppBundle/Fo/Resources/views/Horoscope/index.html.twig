@@ -1,9 +1,13 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <ul>
+    <section>
+        <h1 class="title-section">L'horoscope <span>du jour</span></h1>
+
         {% for sign in listSign %}
-            <li><a href="{{ path('fo_horoscope_by_type', { type : sign }) }}">{{ sign | title }}</a></li>
+            <article>
+                <a href="{{ path('fo_horoscope_by_type', { type : sign }) }}">{{ sign | title }}</a>
+            </article>
         {% endfor %}
-    </ul>
+    </section>
 {% endblock %}
