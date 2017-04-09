@@ -23,21 +23,25 @@ services:
       arguments:  [ '@doctrine.orm.entity_manager' ]
 
   app_core_paiement_method:
-        class:  'AppBundle\Core\Services\PaiementMethod'
-        arguments:  [ '@doctrine.orm.entity_manager' ]
+      class:  'AppBundle\Core\Services\PaiementMethod'
+      arguments:  [ '@doctrine.orm.entity_manager' ]
 
   app_core_guide_book:
       class: 'AppBundle\Core\Services\GuideBook'
       arguments: [ '@doctrine.orm.entity_manager', '@app_core_upload_file' ]
 
   app_core_year_book:
-        class: 'AppBundle\Core\Services\YearBook'
-        arguments: [ '@doctrine.orm.entity_manager', '@app_core_upload_file' ]
+      class: 'AppBundle\Core\Services\YearBook'
+      arguments: [ '@doctrine.orm.entity_manager', '@app_core_upload_file' ]
 
   app_core_horosocope:
-        class: 'AppBundle\Core\Services\Horoscope'
-        arguments: [ '@app_core_horosocope_dictionnary', '@snc_redis.default' ]
+      class: 'AppBundle\Core\Services\Horoscope'
+      arguments: [ '@app_core_horosocope_dictionnary', '@snc_redis.default' ]
 
   app_core_horosocope_dictionnary:
-          class: 'AppBundle\Core\Services\HoroscopeDictionnary'
-          arguments: [ '%url_horoscope%', '%horoscope_period%' ]
+      class: 'AppBundle\Core\Services\HoroscopeDictionnary'
+      arguments: [ '%url_horoscope%', '%horoscope_period%' ]
+
+  app_core_contact:
+      class: 'AppBundle\Core\Services\Contact'
+      arguments: [ '@templating', '@mailer', '%mail_contact%' ]

@@ -31,12 +31,12 @@ class Horoscope
     /**
      * @var string
      */
-    private $picturePrimary;
+    private $primaryPicture;
 
     /**
      * @var string
      */
-    private $pictureSecondary;
+    private $secondaryPicture;
 
     /**
      * Horoscope constructor.
@@ -112,32 +112,32 @@ class Horoscope
     /**
      * @return string
      */
-    public function getPicturePrimary(): string
+    public function getPrimaryPicture(): string
     {
-        return $this->picturePrimary;
+        return $this->primaryPicture;
     }
 
     /**
-     * @param string $picturePrimary
+     * @param string $primaryPicture
      */
-    public function setPicturePrimary(string $picturePrimary)
+    public function setPrimaryPicture(string $primaryPicture)
     {
-        $this->picturePrimary = $picturePrimary;
+        $this->primaryPicture = $primaryPicture;
     }
 
     /**
      * @return string
      */
-    public function getPictureSecondary(): string
+    public function getSecondaryPicture(): string
     {
-        return $this->pictureSecondary;
+        return $this->secondaryPicture;
     }
 
     /**
-     * @param string $pictureSecondary
+     * @param string $secondaryPicture
      */
-    public function setPictureSecondary(string $pictureSecondary)
+    public function setSecondaryPicture(string $secondaryPicture)
     {
-        $this->pictureSecondary = $pictureSecondary;
+        $this->secondaryPicture = $secondaryPicture;
     }
 }

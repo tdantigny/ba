@@ -15,12 +15,31 @@
         <nav class="header__nav ">
             <div class="header__nav__site">
                 <ul>
-                    <li{% if app.request.attributes.get('_route') == 'fo_home' %} class="actif"{% endif %}><a href="{{ path('fo_home') }}">Accueil</a></li>
-                    <li{% if app.request.attributes.get('_route') == 'fo_horoscope' %} class="actif"{% endif %}><a href="{{ path('fo_horoscope') }}">Horoscope</a></li>
-                    <li><a href="#">Guide pratique</a></li>
-                    <li><a href="#">Annuaire</a></li>
-                    <li><a href="#">Voyants</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li{% if app.request.attributes.get('_route') == 'fo_home' %} class="actif"{% endif %}>
+                        <a href="{{ path('fo_home') }}">
+                            Accueil
+                        </a>
+                    </li>
+                    <li{% if app.request.attributes.get('_route') == 'fo_horoscope' %} class="actif"{% endif %}>
+                        <a href="{{ path('fo_horoscope') }}">
+                            Horoscope
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Guide pratique
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Annuaire
+                        </a>
+                    </li>
+                    <li{% if app.request.attributes.get('_route') == 'fo_contact' %} class="actif"{% endif %}>
+                        <a href="{{ path('fo_contact') }}">
+                            Contact
+                        </a>
+                    </li>
                     {% if is_granted("ROLE_ADMIN") %}
                         <li><a class="header__navigation__list__element__link" href="{{ path('bo_home') }}">Back-Office</a></li>
                     {% endif %}

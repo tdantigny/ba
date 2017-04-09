@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <section>
+        <h1 class="title-section">Contact</h1>
+        {{ form_start(formulaire) }}
+            {{ form_row(formulaire.sujet) }}
+            {{ form_row(formulaire.nom) }}
+            {{ form_row(formulaire.email) }}
+            {{ form_row(formulaire.message) }}
+        {{ form_end(formulaire) }}
+    </section>
+{% endblock %}

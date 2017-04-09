@@ -114,10 +114,10 @@ class Horoscope
         $horoscopeModel->setContent($this->cleanContent($content[0][3]));
         $horoscopeModel->setDate(new \DateTime($content[0][4]));
         $horoscopeModel->setType($content[0][6]);
-        $horoscopeModel->setPicturePrimary(
+        $horoscopeModel->setPrimaryPicture(
             $this->horoscopeDictionnary->getTypeFrenchToEnglish($content[0][6]).'_primary.png'
         );
-        $horoscopeModel->setPictureSecondary(
+        $horoscopeModel->setSecondaryPicture(
             $this->horoscopeDictionnary->getTypeFrenchToEnglish($content[0][6]).'_secondary.png'
         );
 
