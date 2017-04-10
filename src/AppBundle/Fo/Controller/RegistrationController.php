@@ -51,7 +51,12 @@ class RegistrationController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
-            if ($form->isValid()) {
+            $existUser = $this->get('app_core_user')->existUserNewsletter(
+                $user->getEmail()
+            );
+            if ($form->isValid()
+                && !$existUser
+            ) {
                 $event = new FormEvent($form, $request);
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
                 $user->setUsername($user->getEmail());
@@ -65,12 +70,38 @@ class RegistrationController extends BaseController
                     $url = $this->generateUrl('fo_home');
                     $request->getSession()
                         ->getFlashBag()
+                        ->add('success', 'Inscription effectuée avec succès');
+                    $response = new RedirectResponse($url);
+                }
+
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+
+                return $response;
+            }
+
+            if ($form->isValid()
+                && $existUser
+            ) {
+                $userService = $this->get('app_core_user');
+                $userRegister = $userService->getUserNewsletter(
+                    $user->getEmail()
+                );
+                $userRegisterUpdate = $this->get('app_core_user')->switchUserData(
+                    $userRegister,
+                    $user
+                );
+                $this->getDoctrine()->getManager()
+                    ->flush($userRegisterUpdate);
+                if (null === $response = $event->getResponse()) {
+                    $url = $this->generateUrl('fo_home');
+                    $request->getSession()
+                        ->getFlashBag()
                         ->add('success', 'Inscription effectuée avec succès')
                     ;
                     $response = new RedirectResponse($url);
                 }
 
-                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
+                $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($userRegisterUpdate, $request, $response));
 
                 return $response;
             }

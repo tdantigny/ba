@@ -10,7 +10,6 @@ use Symfony\Component\Validator\Constraints\DateTime;
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
- * @UniqueEntity("email", message="Ce login est déjà utilisé")
  * @ORM\AttributeOverrides({
  *      @ORM\AttributeOverride(name="email", column=@ORM\Column(type="string", name="email", length=255, unique=false, nullable=true)),
  *      @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(type="string", name="email_canonical", length=255, unique=false, nullable=true))
@@ -46,19 +45,19 @@ class Users extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(name="city", type="string", length=65)
+     * @ORM\Column(name="city", type="string", length=65, nullable=true)
      */
     private $city;
 
     /**
      * @var string
-     * @ORM\Column(name="civility", type="string", length=5)
+     * @ORM\Column(name="civility", type="string", length=5, nullable=true)
      */
     private $civility;
 
     /**
      * @var string
-     * @ORM\Column(name="phone_number", type="string", length=10)
+     * @ORM\Column(name="phone_number", type="string", length=10, nullable=true)
      */
     private $phoneNumber;
 
@@ -70,7 +69,7 @@ class Users extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(name="address1", type="string", length=100)
+     * @ORM\Column(name="address1", type="string", length=100, nullable=true)
      */
     private $address1;
 

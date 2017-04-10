@@ -20,7 +20,7 @@ services:
 
   app_core_user:
       class:  'AppBundle\Core\Services\User'
-      arguments:  [ '@doctrine.orm.entity_manager' ]
+      arguments:  [ '@doctrine.orm.entity_manager', '@security.password_encoder' ]
 
   app_core_paiement_method:
       class:  'AppBundle\Core\Services\PaiementMethod'

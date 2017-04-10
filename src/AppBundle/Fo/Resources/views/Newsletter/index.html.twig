@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <section>
+        <h1 class="title-section">Newsletter</h1>
+        {% if app.user %}
+            <input id="registration-newsletter" value="Je m'inscris" type="button">
+        {% else %}
+            {{ form_start(form) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.zipCode) }}
+                {{ form_row(form.lastName) }}
+                {{ form_row(form.firstName) }}
+                {{ form_row(form.birthDate) }}
+            {{ form_end(form) }}
+        {% endif %}
+    </section>
+{% endblock %}

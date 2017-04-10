@@ -14,3 +14,7 @@ assetic:
         guide_book_js:
             inputs:
                 - '%kernel.root_dir%/Resources/public/js/guide_book.js'
+
+        newsletter_js:
+            inputs:
+                - '%kernel.root_dir%/Resources/public/js/newsletter.js'

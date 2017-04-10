@@ -5,6 +5,7 @@ namespace AppBundle\Core\Services;
 use AppBundle\Core\Entity\Users;
 use AppBundle\Core\Manager\Manager;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoder;
 
 /**
  * Class User
@@ -13,12 +14,19 @@ use Doctrine\ORM\EntityManager;
 class User extends Manager
 {
     /**
-     * User constructor.
-     * @param EntityManager $entityManager
+     * @var UserPasswordEncoder
      */
-    public function __construct(EntityManager $entityManager)
+    private $passwordEncoder;
+
+    /**
+     * User constructor.
+     * @param EntityManager       $entityManager
+     * @param UserPasswordEncoder $passwordEncoder
+     */
+    public function __construct(EntityManager $entityManager, UserPasswordEncoder $passwordEncoder)
     {
         parent::__construct($entityManager);
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     /**
@@ -53,5 +61,81 @@ class User extends Manager
         $user->setPhoneNumber(null);
 
         $this->getEntityManager()->flush($user);
+    }
+
+    /**
+     * Check if a user exist by his username and if he's register to the newsletter
+     *
+     * @param string $mail
+     * @return bool
+     */
+    public function existUserNewsletter(string $mail)
+    {
+        return !empty(
+            $this->getEntityManager()->getRepository('AppBundle:Users')
+                ->findBy(
+                    [
+                        'username' => $mail,
+                        'enabled' => false,
+                        'enableNewsletter' => true,
+                    ]
+                )
+        );
+    }
+
+    /**
+     * Check if a user exist by his username
+     *
+     * @param string $mail
+     * @return bool
+     */
+    public function existUser(string $mail)
+    {
+        return !empty(
+        $this->getEntityManager()->getRepository('AppBundle:Users')
+            ->findBy(
+                [
+                    'username' => $mail,
+                ]
+            )
+        );
+    }
+
+    /**
+     * Get a user register in the newsletter
+     *
+     * @param string $mail
+     * @return Users|null
+     */
+    public function getUserNewsletter(string $mail)
+    {
+        return $this->getEntityManager()->getRepository('AppBundle:Users')
+            ->findOneBy(
+                [
+                    'username' => $mail,
+                    'enabled' => false,
+                    'enableNewsletter' => true,
+                ]
+            );
+    }
+
+    public function switchUserData(Users $userRegister, Users $userFromForm)
+    {
+        $encoder = $this->passwordEncoder;
+        $encoded = $encoder->encodePassword($userFromForm, $userFromForm->getPassword());
+        $userRegister->setPassword($encoded);
+        $userRegister->setEnableNewsletter($userFromForm->isEnableNewsletter());
+        $userRegister->setCivility($userFromForm->getCivility());
+        $userRegister->setFirstName($userFromForm->getFirstName());
+        $userRegister->setLastName($userFromForm->getLastName());
+        $userRegister->setAddress1($userFromForm->getAddress1());
+        $userRegister->setAddress2($userFromForm->getAddress2());
+        $userRegister->setBirthDate($userFromForm->getBirthDate());
+        $userRegister->setCity($userFromForm->getCity());
+        $userRegister->setZipCode($userFromForm->getZipCode());
+        $userRegister->setPhoneNumber($userFromForm->getPhoneNumber());
+        $userRegister->setEnabled(true);
+
+        return $userRegister;
     }
 }

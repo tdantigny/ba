@@ -3,9 +3,9 @@
 namespace AppBundle\Fo\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -59,28 +59,29 @@ class RegistrationType extends AbstractType
                 'required' => true,
                 'label' => 'Prénom',
             ])
-            ->add('birthDate', DateType::class, [
+            ->add('birthDate', BirthdayType::class, [
                 'required' => true,
                 'label' => 'Date de naissance',
+                'format' => 'dd MM y'
             ])
             ->add('address1', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'Adresse 1',
             ])
             ->add('address2', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'Adresse 2',
             ])
             ->add('city', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'Ville',
             ])
             ->add('zipCode', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'Code postal',
             ])
             ->add('phoneNumber', TextType::class, [
-                'required' => true,
+                'required' => false,
                 'label' => 'Téléphone',
             ]);
     }
