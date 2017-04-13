@@ -21,6 +21,7 @@ parameters:
     directory_pictures:
         guide_book: '%kernel.root_dir%/../web/pictures/guide_book/'
         year_book: '%kernel.root_dir%/../web/pictures/year_book/'
+        paiement_method: '%kernel.root_dir%/../web/pictures/paiement_method/'
 
     redis_dsn: 'redis://localhost'
 

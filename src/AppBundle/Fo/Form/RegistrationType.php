@@ -32,6 +32,7 @@ class RegistrationType extends AbstractType
             ->add('enableNewsletter', CheckboxType::class, [
                 'required' => false,
                 'label' => 'Newsletter',
+                'data' => true,
             ])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,

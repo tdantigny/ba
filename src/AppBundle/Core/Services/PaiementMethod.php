@@ -6,6 +6,7 @@ use AppBundle\Core\Exception\CustomException;
 use AppBundle\Core\Manager\Manager;
 use Doctrine\ORM\EntityManager;
 use AppBundle\Core\Entity\PaiementMethod as PaiementMethodEntity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class PaiementMethod
@@ -14,12 +15,19 @@ use AppBundle\Core\Entity\PaiementMethod as PaiementMethodEntity;
 class PaiementMethod extends Manager
 {
     /**
+     * @var UploadFile
+     */
+    private $uploadFile;
+
+    /**
      * PaiementMethod constructor.
      * @param EntityManager $entityManager
+     * @param UploadFile    $uploadFile
      */
-    public function __construct(EntityManager $entityManager)
+    public function __construct(EntityManager $entityManager, UploadFile $uploadFile)
     {
         parent::__construct($entityManager);
+        $this->uploadFile = $uploadFile;
     }
 
     /**
@@ -29,6 +37,8 @@ class PaiementMethod extends Manager
      */
     public function created(PaiementMethodEntity $paiementMethod)
     {
+        $fileName = $this->uploadFile->updateFile($paiementMethod->getPicture(), 'paiement_method');
+        $paiementMethod->setPicture($fileName);
         $this->getEntityManager()->persist($paiementMethod);
         $this->getEntityManager()->flush($paiementMethod);
     }

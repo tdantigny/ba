@@ -8,6 +8,7 @@ use AppBundle\Core\Entity\PaiementMethod;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -87,6 +88,9 @@ class PaiementMethodController extends Controller
      */
     public function detailAction(Request $request, PaiementMethod $paiementMethod)
     {
+        $directoryPictures = $this->getParameter('directory_pictures');
+        $file = new File($directoryPictures['paiement_method'].$paiementMethod->getPicture());
+        $paiementMethod->setPicture($file);
         $form = $this->get('form.factory')->create(PaiementMethodType::class, $paiementMethod);
         $form->handleRequest($request);
 

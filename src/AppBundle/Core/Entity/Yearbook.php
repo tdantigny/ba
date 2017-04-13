@@ -66,13 +66,6 @@ class Yearbook
     private $picture;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="html", type="text")
-     */
-    private $html;
-
-    /**
      * @var Users
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Core\Entity\Users")
@@ -274,30 +267,6 @@ class Yearbook
     public function getPicture()
     {
         return $this->picture;
-    }
-
-    /**
-     * Set html
-     *
-     * @param string $html
-     *
-     * @return Yearbook
-     */
-    public function setHtml($html)
-    {
-        $this->html = $html;
-
-        return $this;
-    }
-
-    /**
-     * Get html
-     *
-     * @return string
-     */
-    public function getHtml()
-    {
-        return $this->html;
     }
 
     /**

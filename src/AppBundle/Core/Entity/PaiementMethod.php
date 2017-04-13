@@ -3,6 +3,7 @@
 namespace AppBundle\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * PaiementMethod
@@ -27,6 +28,13 @@ class PaiementMethod
      * @ORM\Column(name="name", type="string", length=100)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="picture", type="string", length=255)
+     */
+    private $picture;
 
     /**
      * @var bool
@@ -67,6 +75,22 @@ class PaiementMethod
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $picture
+     */
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+    }
+
+    /**
+     * @return string|UploadedFile
+     */
+    public function getPicture()
+    {
+        return $this->picture;
     }
 
     /**

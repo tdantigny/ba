@@ -50,7 +50,6 @@ class YearBook extends Manager
         $this->setCreationDateAndUser($yearBook, $user);
 
         $yearBook->setPicture($fileName);
-        $yearBook->setHtml(html_entity_decode($yearBook->getHtml()));
         $this->getEntityManager()->persist($yearBook);
         $this->getEntityManager()->flush($yearBook);
 

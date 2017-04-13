@@ -24,7 +24,7 @@ services:
 
   app_core_paiement_method:
       class:  'AppBundle\Core\Services\PaiementMethod'
-      arguments:  [ '@doctrine.orm.entity_manager' ]
+      arguments:  [ '@doctrine.orm.entity_manager', '@app_core_upload_file' ]
 
   app_core_guide_book:
       class: 'AppBundle\Core\Services\GuideBook'

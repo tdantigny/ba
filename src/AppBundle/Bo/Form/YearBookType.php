@@ -6,11 +6,9 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Lexik\Bundle\FormFilterBundle\Filter\Form\Type as Filters;
 
 /**
  * Class UserType
@@ -39,13 +37,6 @@ class YearBookType extends AbstractType
             ])
             ->add('picture', FileType::class, [
                 'label' => 'Image',
-            ])
-            ->add('html', TextareaType::class, [
-                'label' => 'Contenu du guide',
-                'attr' => [
-                    'class' => 'tinymce',
-                    'data-theme' => 'bbcode', // Skip it if you want to use default theme
-                ],
             ])
             ->add('paiementsMethod', EntityType::class, [
                 'label' => 'Moyens de paiement',
