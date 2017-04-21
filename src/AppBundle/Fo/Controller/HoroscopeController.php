@@ -21,10 +21,11 @@ class HoroscopeController extends Controller
     public function indexAction()
     {
         $listSign = [];
+
         try {
             foreach ($this->getParameter('url_horoscope') as $key => $value) {
                 $type = $this->get('app_core_horosocope_dictionnary')->getTypeEnglishToFrench($key);
-                $listSign[] = $this->get('app_core_horosocope')->getByType($type);
+                $listSign[] = $this->get('app_core_horosocope')->getByKey($type);
             }
         } catch (CustomException $customException) {
             throw new CustomException($customException->getMessage(), 500);
@@ -32,6 +33,7 @@ class HoroscopeController extends Controller
 
         return $this->render('Horoscope/index.html.twig', [
             'horoscopes' => $listSign,
+            'date' => $this->getDate()
         ]);
     }
 
@@ -44,13 +46,22 @@ class HoroscopeController extends Controller
     public function byTypeAction(string $type)
     {
         try {
-            $horoscope = $this->get('app_core_horosocope')->getByType($type);
+            $horoscope = $this->get('app_core_horosocope')->getByKey($type);
         } catch (CustomException $customException) {
             throw new CustomException($customException->getMessage(), 500);
         }
 
         return $this->render('Horoscope/byType.html.twig', [
             'horoscope' => $horoscope,
+            'date' => $this->getDate()
         ]);
+    }
+
+    /**
+     * @return string
+     */
+    private function getDate () {
+        setlocale (LC_TIME, 'fr_FR.utf8','fra');
+        return strftime("%A %d %B %Y");
     }
 }

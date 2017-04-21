@@ -20,7 +20,7 @@
                             Accueil
                         </a>
                     </li>
-                    <li{% if app.request.attributes.get('_route') == 'fo_horoscope' %} class="actif"{% endif %}>
+                    <li{% if app.request.attributes.get('_route') == 'fo_horoscope' or app.request.attributes.get('_route') == 'fo_horoscope_by_type' %} class="actif"{% endif %}>
                         <a href="{{ path('fo_horoscope') }}">
                             Horoscope
                         </a>

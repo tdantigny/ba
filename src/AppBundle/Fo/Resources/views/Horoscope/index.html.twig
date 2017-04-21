@@ -1,15 +1,21 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <section>
-        <h1 class="title-section">L'horoscope <span>du jour</span></h1>
-
+    <section class="horoscope">
+        <h1>L'horoscope <span>du jour</span></h1>
+        <h2>{{ date|capitalize }}</h2>
+        <div class="row">
         {% for horoscope in horoscopes %}
-            <article style="display: inline">
-                <a href="{{ path('fo_horoscope_by_type', { type : horoscope.type }) }}">
-                    <img style="width: 5%"  src="{{ asset('pictures/logo_horoscope/'~horoscope.primaryPicture) }}" alt="{{ horoscope.type }}">
-                </a>
-            </article>
+
+            <a href="{{ path('fo_horoscope_by_type', { type : horoscope.key }) }}" class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
+                <article class="horoscope__sign">
+                    <h1>{{ horoscope.name|capitalize }}</h1>
+                    <img src="{{ asset('pictures/logo_horoscope/'~horoscope.primaryPicture) }}" alt="{{ horoscope.key }}">
+                    <h2>{{ horoscope.periodStart }} - {{ horoscope.periodEnd }}</h2>
+                </article>
+            </a>
+
         {% endfor %}
+        </div>
     </section>
 {% endblock %}

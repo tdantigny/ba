@@ -26,33 +26,39 @@ class Horoscope
     private $redis;
 
     /**
+     * @var Redis
+     */
+    private $periodHoroscope;
+
+    /**
      * Horoscope constructor.
      * @param HoroscopeDictionnary $horoscopeDictionnary
      * @param Redis                $redis
      */
-    public function __construct(HoroscopeDictionnary $horoscopeDictionnary, Redis $redis)
+    public function __construct(HoroscopeDictionnary $horoscopeDictionnary, Redis $redis, array $periodHoroscope)
     {
         $this->horoscopeDictionnary = $horoscopeDictionnary;
         $this->redis = $redis;
+        $this->periodHoroscope = $periodHoroscope;
     }
 
     /**
      * Get all horoscope model
-     * @param string $type
+     * @param string $key
      * @throws CustomException
      * @return HoroscopeModel
      */
-    public function getByType(string $type)
+    public function getByKey(string $key)
     {
         $now = new \DateTime();
-        $cleCache = $now->format('Y-m-d').'_horoscope_'.$type;
+        $cleCache = $now->format('Y-m-d').'_horoscope_'.$key;
         if ($this->redis->exists($cleCache)) {
             return unserialize($this->redis->get($cleCache));
         }
 
         try {
-            $urlHoroscope = $this->horoscopeDictionnary->getUrlFromFrenchType($type);
-            $modelHoroscope = $this->getXml($urlHoroscope, $type);
+            $urlHoroscope = $this->horoscopeDictionnary->getUrlFromFrenchType($key);
+            $modelHoroscope = $this->getXml($urlHoroscope, $key);
         } catch (CustomException $customException) {
             throw new CustomException('Impossible de récupérer les horoscopes : code '.$customException->getCode().'.', -1);
         }
@@ -85,7 +91,6 @@ class Horoscope
     public function getByBirthDate(\DateTime $birthDate)
     {
         $type = $this->horoscopeDictionnary->getTypeByDate($birthDate);
-
         $frenchType = $this->horoscopeDictionnary->getTypeEnglishToFrench($type);
 
         return $this->getByType($frenchType);
@@ -111,9 +116,10 @@ class Horoscope
         }
 
         $horoscopeModel->setTitle($content[0][0]);
-        $horoscopeModel->setContent($this->cleanContent($content[0][3]));
         $horoscopeModel->setDate(new \DateTime($content[0][4]));
-        $horoscopeModel->setType($content[0][6]);
+        $horoscopeModel->setKey($content[0][6]);
+        $horoscopeModel->setName($this->getRealName($content[0][6]));
+        $horoscopeModel->setContent($this->cleanContent($content[0][3]));
         $horoscopeModel->setPrimaryPicture(
             $this->horoscopeDictionnary->getTypeFrenchToEnglish($content[0][6]).'_primary.png'
         );
@@ -121,8 +127,24 @@ class Horoscope
             $this->horoscopeDictionnary->getTypeFrenchToEnglish($content[0][6]).'_secondary.png'
         );
 
+        $horoscopeModel->setPeriodStart($this->periodHoroscope[$content[0][6]]['start']);
+        $horoscopeModel->setPeriodEnd($this->periodHoroscope[$content[0][6]]['end']);
+
         return $horoscopeModel;
     }
+
+    private function getRealName ($key)
+    {
+        if ($key === 'belier') {
+            return 'bélier';
+        }
+        if ($key === 'gemeau') {
+            return 'gémeaux';
+        }
+
+        return $key;
+    }
+
 
     /**
      * Get the xml for the horosocope
@@ -170,25 +192,32 @@ class Horoscope
      */
     private function cleanContent(string $content)
     {
+        $arrayContent = [];
+
         $cleanContent = preg_replace('#\\n*#', '', $content);
         $cleanContent = preg_replace('#^<br\/>#', '', $cleanContent);
         $cleanContent = preg_replace('#<center><a.*<\/center>#', '', $cleanContent);
         $cleanContent = preg_replace('#<center>.*<\/center>#', '', $cleanContent);
-        $cleanContent = preg_replace('#^<br><br>#', '', $cleanContent);
+        $cleanContent = preg_replace('#<br><br>#', '', $cleanContent);
+        $cleanContent = preg_replace('#<b>#', '', $cleanContent);
+        $cleanContent = preg_replace('#</b>#', '', $cleanContent);
+        $cleanContent = preg_replace('#<br>#', '||', $cleanContent);
         $explodeContent = explode('Horoscope', $cleanContent);
 
         foreach ($explodeContent as $key => $truncateContent) {
-            if (false !== strpos($truncateContent, 'Argent')
-                || false !== strpos($truncateContent, 'Vie sociale')
-                || false !== strpos($truncateContent, 'Famille')
-                || false !== strpos($truncateContent, 'Nombre de chance')
-                || false !== strpos($truncateContent, 'Citation du jour')
-                || false !== strpos($truncateContent, 'Clin d\'oeil')
-            ) {
+            if (false !== strpos($truncateContent, 'Nombre de chance') || $truncateContent === '') {
                 unset($explodeContent[$key]);
+            }
+            else {
+                $explodeContent = explode('||',$truncateContent);
+                $explodeTitle = explode('-',$explodeContent[0]);
+                $cleanContent = [];
+                $cleanContent['title'] = trim($explodeTitle[1]);
+                $cleanContent['text'] = $explodeContent[1];
+                $arrayContent[] = $cleanContent;
             }
         }
 
-        return implode('Horoscope', $explodeContent);
+        return $arrayContent;
     }
 }

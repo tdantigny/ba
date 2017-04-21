@@ -19,14 +19,19 @@ class Horoscope
     private $date;
 
     /**
-     * @var string
+     * @var array
      */
     private $content;
 
     /**
      * @var string
      */
-    private $type;
+    private $key;
+
+    /**
+     * @var string
+     */
+    private $name;
 
     /**
      * @var string
@@ -37,6 +42,16 @@ class Horoscope
      * @var string
      */
     private $secondaryPicture;
+
+    /**
+     * @var string
+     */
+    private $periodStart;
+
+    /**
+     * @var string
+     */
+    private $periodEnd;
 
     /**
      * Horoscope constructor.
@@ -78,17 +93,17 @@ class Horoscope
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getContent(): string
+    public function getContent(): array
     {
         return $this->content;
     }
 
     /**
-     * @param string $content
+     * @param array $content
      */
-    public function setContent(string $content)
+    public function setContent(array $content)
     {
         $this->content = $content;
     }
@@ -96,17 +111,33 @@ class Horoscope
     /**
      * @return string
      */
-    public function getType(): string
+    public function getKey(): string
     {
-        return $this->type;
+        return $this->key;
     }
 
     /**
-     * @param string $type
+     * @param string $key
      */
-    public function setType(string $type)
+    public function setKey(string $key)
     {
-        $this->type = $type;
+        $this->key = $key;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $key
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
     }
 
     /**
@@ -139,5 +170,38 @@ class Horoscope
     public function setSecondaryPicture(string $secondaryPicture)
     {
         $this->secondaryPicture = $secondaryPicture;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getPeriodStart(): string
+    {
+        return $this->periodStart;
+    }
+
+    /**
+     * @param string $periodStart
+     */
+    public function setPeriodStart(string $periodStart)
+    {
+        $this->periodStart = $periodStart;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPeriodEnd(): string
+    {
+        return $this->periodEnd;
+    }
+
+    /**
+     * @param string $periodEnd
+     */
+    public function setPeriodEnd(string $periodEnd)
+    {
+        $this->periodEnd = $periodEnd;
     }
 }

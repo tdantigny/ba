@@ -1,6 +1,19 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <h2>{{ horoscope.title }}</h2>
-    <div>{{ horoscope.content | raw }}</div>
+
+    <section class="horoscope-type">
+        <h1>Horoscope <span>{{ horoscope.name|capitalize }}</span></h1>
+        <h2>{{ date|capitalize }}</h2>
+
+        {% for content in horoscope.content %}
+
+        <article>
+            <h1>{{ content.title | raw }}</h1>
+            <p>{{ content.text | raw }}</p>
+        </article>
+
+        {% endfor %}
+    </section>
+
 {% endblock %}
