@@ -79,7 +79,7 @@ class Horoscope
         $randomKeyType = rand(0, 11);
         $frenchType = $this->horoscopeDictionnary->getTypeEnglishToFrench($allType[$randomKeyType]);
 
-        return $this->getByType($frenchType);
+        return $this->getByKey($frenchType);
     }
 
     /**
@@ -93,7 +93,7 @@ class Horoscope
         $type = $this->horoscopeDictionnary->getTypeByDate($birthDate);
         $frenchType = $this->horoscopeDictionnary->getTypeEnglishToFrench($type);
 
-        return $this->getByType($frenchType);
+        return $this->getByKey($frenchType);
     }
 
     /**
