@@ -30,8 +30,8 @@
                             Guide pratique
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
+                    <li{% if app.request.attributes.get('_route') == 'fo_year_book' %} class="actif"{% endif %}>
+                        <a href="{{ path('fo_year_book') }}">
                             Annuaire
                         </a>
                     </li>

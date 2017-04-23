@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <section>
+        <h1 class="title-section">L'<b>annuaire</b></h1>
+        <div>
+            Accedebant enim eius asperitati, ubi inminuta vel laesa amplitudo imperii dicebatur,
+            et iracundae suspicionum quantitati proximorum cruentae blanditiae exaggerantium incidentia
+            et dolere inpendio simulantium, si principis periclitetur vita, a cuius salute velut filo pendere statum
+            orbis terrarum fictis vocibus exclamabant.
+        </div>
+
+        {% for yearBookPushed in yearBooksPushed %}
+            {% include 'YearBook/partial/year-book-detail.html.twig' with { 'yearBook' : yearBookPushed, 'isTop' : true, 'index' : loop.index } %}
+        {% endfor %}
+
+        {{ knp_pagination_render(pagination) }}
+
+        {% for yearBook in pagination.items %}
+            {% include 'YearBook/partial/year-book-detail.html.twig' with { 'yearBook' : yearBook } %}
+        {% endfor %}
+    </section>
+{% endblock %}

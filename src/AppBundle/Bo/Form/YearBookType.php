@@ -28,6 +28,12 @@ class YearBookType extends AbstractType
             ])
             ->add('active', CheckboxType::class, [
                 'label' => 'Actif',
+                'required' => false,
+            ])
+            ->add(
+                'push', CheckboxType::class, [
+                'label' => 'Mettre en avant',
+                'required' => false,
             ])
             ->add('slogan', TextType::class, [
                 'label' => 'Slogan',

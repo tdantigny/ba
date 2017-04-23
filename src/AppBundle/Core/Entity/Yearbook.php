@@ -54,9 +54,9 @@ class Yearbook
     /**
      * @var int
      *
-     * @ORM\Column(name="push", type="integer", nullable=true)
+     * @ORM\Column(name="push", type="boolean")
      */
-    private $push;
+    private $push = false;
 
     /**
      * @var string
@@ -104,6 +104,9 @@ class Yearbook
 
     /**
      * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Core\Entity\PaiementMethodForYearBook", mappedBy="yearbook")
+     *
      */
     private $paiementsMethod;
 

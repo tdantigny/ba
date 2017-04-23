@@ -41,7 +41,7 @@ twig:
         - '%kernel.root_dir%/../src/AppBundle/Fo/Resources/views'
         - '%kernel.root_dir%/../src/AppBundle/Bo/Resources/views'
     form_themes:
-            - 'LexikFormFilterBundle:Form:form_div_layout.html.twig'
+        - 'LexikFormFilterBundle:Form:form_div_layout.html.twig'
 
 # Doctrine Configuration
 doctrine:
