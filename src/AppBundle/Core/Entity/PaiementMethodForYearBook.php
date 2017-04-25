@@ -24,7 +24,7 @@ class PaiementMethodForYearBook
     /**
      * @var Yearbook
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Core\Entity\Yearbook")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Core\Entity\Yearbook", inversedBy="paiementsMethod")
      * @ORM\JoinColumn(name="yearbook_id", referencedColumnName="id")
      */
     private $yearbook;

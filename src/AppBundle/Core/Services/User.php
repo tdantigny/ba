@@ -138,4 +138,16 @@ class User extends Manager
 
         return $userRegister;
     }
+
+    /**
+     * Get a user
+     *
+     * @param int $id
+     * @return Users|null
+     */
+    public function get(int $id)
+    {
+        return $this->getEntityManager()->getRepository('AppBundle:Users')
+            ->find($id);
+    }
 }

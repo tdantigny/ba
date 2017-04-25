@@ -10,4 +10,27 @@ namespace AppBundle\Core\Repository;
  */
 class YearbookRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * Get pagination query for year book view
+     *
+     * @return \Doctrine\ORM\Query
+     */
+    public function getPaginationQuery()
+    {
+        $queryBuilder = $this->createQueryBuilder('yb')
+            ->where(
+                'yb.active = :active'
+            )
+            ->andWhere(
+                'yb.push = :notPush'
+            )
+            ->setParameters(
+                [
+                    'active' => true,
+                    'notPush' => false,
+                ]
+            );
+
+        return $queryBuilder->getQuery();
+    }
 }

@@ -1,0 +1,16 @@
+{% set rateCalculated = calculateRate(yearBook.id) %}
+
+{% if is_granted("IS_AUTHENTICATED_FULLY") %}
+    {% set rate = getRate(yearBook.id, app.user.id) %}
+    <div id="rate-data-{{ yearBook.id }}" data-rate="{{ rate }}">
+        {% for i in 1..5 %}
+            {% if rate >= loop.index %}
+                <span onmouseover="overStar({{ yearBook.id }}, {{ loop.index }})" onmouseout="outStar({{ yearBook.id }}, {{ loop.index }})" data-id="{{ loop.index }}" data-yearbook="{{ yearBook.id }}" class="glyphicon glyphicon-star voteYearBook star-{{ yearBook.id }}-{{ loop.index }}" style="color: #FFD700; font-size: 2em; margin-right: -2%;" aria-hidden="true"></span>
+            {% else %}
+                <span onmouseover="overStar({{ yearBook.id }}, {{ loop.index }})" onmouseout="outStar({{ yearBook.id }}, {{ loop.index }})" data-id="{{ loop.index }}" data-yearbook="{{ yearBook.id }}" class="glyphicon glyphicon-star-empty voteYearBook star-{{ yearBook.id }}-{{ loop.index }}" style="color: #FFD700; font-size: 2em; margin-right: -2%;" aria-hidden="true"></span>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}
+<p><span id="calculate-rate-{{ yearBook.id }}">{{ rateCalculated }}</span>%<br> le recommande</p>
+<p><span id="number-click-{{ yearBook.id }}">{{ yearBook.click }}</span> vues</p>

@@ -32,11 +32,11 @@ services:
 
   app_core_year_book:
       class: 'AppBundle\Core\Services\YearBook'
-      arguments: [ '@doctrine.orm.entity_manager', '@app_core_upload_file' ]
+      arguments: [ '@doctrine.orm.entity_manager', '@app_core_upload_file', '@knp_paginator' ]
 
   app_core_horosocope:
       class: 'AppBundle\Core\Services\Horoscope'
-      arguments: [ '@app_core_horosocope_dictionnary', '@snc_redis.default', '%horoscope_date%' ]
+      arguments: [ '@app_core_horosocope_dictionnary', '@snc_redis.default', '%horoscope_period%' ]
 
   app_core_horosocope_dictionnary:
       class: 'AppBundle\Core\Services\HoroscopeDictionnary'
@@ -45,6 +45,16 @@ services:
   app_core_contact:
       class: 'AppBundle\Core\Services\Contact'
       arguments: [ '@templating', '@mailer', '%mail_contact%' ]
+
+  app_core_vote_year_book:
+      class: 'AppBundle\Core\Services\VoteYearBook'
+      arguments:  [ '@doctrine.orm.entity_manager' ]
+
+  app_fo_rate_extension:
+      class: 'AppBundle\Fo\Twig\RateExtension'
+      arguments:  [ '@app_core_year_book', '@app_core_user', '@app_core_vote_year_book' ]
+      tags:
+          - { name: twig.extension }
 
   app_core_ad:
       class: 'AppBundle\Core\Services\Ad'

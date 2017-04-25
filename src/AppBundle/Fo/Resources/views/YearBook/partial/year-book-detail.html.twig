@@ -1,0 +1,30 @@
+{% if isTop is not defined %}
+    {% set isTop = false %}
+{% endif %}
+{% if index is not defined %}
+    {% set index = 0 %}
+{% endif %}
+<div class="row {% if isTop %} yearBookPushed {% endif %}">
+    <div class="col-md-1">
+        {% if isTop %}
+            {{ index }}
+        {% endif %}
+    </div>
+    <div class="col-md-2">
+        <img width="100%" src="/pictures/year_book/{{ yearBook.picture }}">
+    </div>
+    <div class="col-md-4">
+        <p>{{ yearBook.name }}</p>
+        <p>{{ yearBook.slogan }}</p>
+        <a target="_blank" class="go-year-book" data-id="{{ yearBook.id }}" href="{{ yearBook.url }}"><< Voir le site >></a>
+    </div>
+    <div class="col-md-2">
+        {% include 'YearBook/partial/vote-year-book.html.twig' with { 'yearBook' : yearBook } %}
+    </div>
+    <div class="col-md-3">
+        <h4>mode de paiement</h4>
+        {% for paiementMethodLink in yearBook.paiementsMethod %}
+            <img width="10%" src="/pictures/paiement_method/{{ paiementMethodLink.paiementMethod.picture }}">
+        {% endfor %}
+    </div>
+</div>

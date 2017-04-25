@@ -115,20 +115,25 @@ class Horoscope
             throw new CustomException('XML not valid', 4);
         }
 
+        $horoscopeTitleEnglish = $this->horoscopeDictionnary->getTypeFrenchToEnglish($content[0][6]);
         $horoscopeModel->setTitle($content[0][0]);
         $horoscopeModel->setDate(new \DateTime($content[0][4]));
         $horoscopeModel->setKey($content[0][6]);
         $horoscopeModel->setName($this->getRealName($content[0][6]));
         $horoscopeModel->setContent($this->cleanContent($content[0][3]));
         $horoscopeModel->setPrimaryPicture(
-            $this->horoscopeDictionnary->getTypeFrenchToEnglish($content[0][6]).'_primary.png'
+            $horoscopeTitleEnglish.'_primary.png'
         );
         $horoscopeModel->setSecondaryPicture(
-            $this->horoscopeDictionnary->getTypeFrenchToEnglish($content[0][6]).'_secondary.png'
+            $horoscopeTitleEnglish.'_secondary.png'
         );
 
-        $horoscopeModel->setPeriodStart($this->periodHoroscope[$content[0][6]]['start']);
-        $horoscopeModel->setPeriodEnd($this->periodHoroscope[$content[0][6]]['end']);
+        $horoscopeModel->setPeriodStart(
+            $this->periodHoroscope[$horoscopeTitleEnglish]['start']
+        );
+        $horoscopeModel->setPeriodEnd(
+            $this->periodHoroscope[$horoscopeTitleEnglish]['end']
+        );
 
         return $horoscopeModel;
     }
