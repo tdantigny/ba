@@ -21,6 +21,7 @@ class HoroscopeController extends Controller
     public function indexAction()
     {
         $listSign = [];
+        $ad = $this->get('app_core_ad');
 
         try {
             foreach ($this->getParameter('url_horoscope') as $key => $value) {
@@ -33,7 +34,8 @@ class HoroscopeController extends Controller
 
         return $this->render('Horoscope/index.html.twig', [
             'horoscopes' => $listSign,
-            'date' => $this->getDate()
+            'date' => $this->getDate(),
+            'adWallpaper' => $ad->getAdWallpaper()
         ]);
     }
 
@@ -45,6 +47,8 @@ class HoroscopeController extends Controller
      */
     public function byTypeAction(string $type)
     {
+        $ad = $this->get('app_core_ad');
+
         try {
             $horoscope = $this->get('app_core_horosocope')->getByKey($type);
         } catch (CustomException $customException) {
@@ -53,7 +57,8 @@ class HoroscopeController extends Controller
 
         return $this->render('Horoscope/byType.html.twig', [
             'horoscope' => $horoscope,
-            'date' => $this->getDate()
+            'date' => $this->getDate(),
+            'adWallpaper' => $ad->getAdWallpaper()
         ]);
     }
 

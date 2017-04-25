@@ -23,6 +23,7 @@ class HomeController extends Controller
         $this->get('login_success_handler');
 
         $guideBook = $this->get('app_core_guide_book')->getRandomOne();
+        $ad = $this->get('app_core_ad');
 
         //We check if the current user is connected
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -40,6 +41,7 @@ class HomeController extends Controller
             [
                 'guideBook' => $guideBook,
                 'horoscope' => $horoscope,
+                'adWallpaper' => $ad->getAdWallpaper()
             ]
         );
     }

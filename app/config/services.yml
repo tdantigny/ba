@@ -45,3 +45,7 @@ services:
   app_core_contact:
       class: 'AppBundle\Core\Services\Contact'
       arguments: [ '@templating', '@mailer', '%mail_contact%' ]
+
+  app_core_ad:
+      class: 'AppBundle\Core\Services\Ad'
+      arguments: [ ]

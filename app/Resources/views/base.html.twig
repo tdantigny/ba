@@ -23,6 +23,8 @@
         <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
     {% endblock %}
+    {% block stylesheetsAdWallpaper %}
+    {% endblock %}
 
     {% block javascript %}
         {% javascripts '@user_js' '@guide_book_js' '@newsletter_js' %}
@@ -31,7 +33,7 @@
     {% endblock %}
 </head>
 
-<body>
+<body{% if adWallpaper is defined and adWallpaper != null %} class="adWallpaperActif"{% endif %}>
 
 {% include ':partials:header.html.twig' %}
 
@@ -46,8 +48,14 @@
     {% endfor %}
 {% endblock %}
 
-<main class="container no-padding">
+<main>
+    {% if adWallpaper is defined and adWallpaper != null %}
+        {% include ':partials:ad-bg.html.twig' %}
+    {% endif %}
+
+    <div class="content container no-padding">
     {% block body %}{% endblock %}
+    </div>
 </main>
 
 {% include ':partials:footer.html.twig' %}
