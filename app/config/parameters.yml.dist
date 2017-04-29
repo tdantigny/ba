@@ -78,3 +78,42 @@ parameters:
             end: 'Apr 14'
 
     mail_contact: 'contact@webeditionplanet.com'
+
+
+    horoscope_date:
+        belier:
+            start: '21 mars'
+            end: '19 avril'
+        taureau:
+            start: '20 avril'
+            end: '20 mai'
+        gemeau:
+            start: '21 mai'
+            end: '21 juin'
+        cancer:
+            start: '22 juin'
+            end: '22 juillet'
+        lion:
+            start: '23 juillet'
+            end: '22 août'
+        vierge:
+            start: '23 août'
+            end: '22 septembre'
+        balance:
+            start: '23 septembre'
+            end: '23 octobre'
+        scorpion:
+            start: '24 octobre'
+            end: '22 novembre'
+        sagittaire:
+            start: '23 novembre'
+            end: '21 décembre'
+        capricorne:
+            start: '22 décembre'
+            end: '19 janvier'
+        verseau:
+            start: '20 janvier'
+            end: '18 février'
+        poissons:
+            start: '19 février'
+            end: '20 mars'
