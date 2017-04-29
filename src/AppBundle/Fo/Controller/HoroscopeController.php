@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 /**
  * Class HoroscopeController
  * @package AppBundle\Bo\Controller
- * @Route("/fo/horoscope")
+ * @Route("/horoscope")
  */
 class HoroscopeController extends Controller
 {
