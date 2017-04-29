@@ -11,6 +11,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 class GuideBook
 {
     /**
+     * @var int
+     */
+    private $id;
+
+    /**
      * @var string
      */
     private $title;
@@ -29,6 +34,22 @@ class GuideBook
      * @var string
      */
     private $picture;
+
+    /**
+     * @return string
+     */
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string $id
+     */
+    public function setId(int $id)
+    {
+        $this->id = $id;
+    }
 
     /**
      * @return string

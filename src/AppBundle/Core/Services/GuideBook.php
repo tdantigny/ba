@@ -119,7 +119,7 @@ class GuideBook extends Manager
     {
         $guidBooks = [];
         for ($index = 0; $index < 4; $index++) {
-            $guidBooks[] = $this->get(1);
+            $guidBooks[] = $this->get($index+1);
         }
 
         return $guidBooks;
@@ -165,6 +165,7 @@ h3. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulpu
         $paragraphs->add($guideBookParagraphs3);
 
         $guideBook = new GuideBookModel();
+        $guideBook->setId($id);
         $guideBook->setEnable(true);
         $guideBook->setTitle('Test');
         $guideBook->setPicture('1344585.png');
