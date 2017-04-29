@@ -34,6 +34,12 @@ $().ready(function() {
             }
         });
     });
+
+    $('.see-comments').click(function () {
+        var yearBookId = $(this).data('yearbookid');
+        $('#comments-modal-'+yearBookId).modal('show');
+
+    });
 });
 
 function overStar(yearBookId, number)

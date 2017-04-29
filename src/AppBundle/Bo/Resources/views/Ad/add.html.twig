@@ -1,0 +1,14 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h2>Créer une pub</h2>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div>
+            <input type="submit" value="Créer" />
+        </div>
+    {{ form_end(form) }}
+
+    <a href="{{ path('bo_ad_list') }}">Annuler</a>
+{% endblock %}

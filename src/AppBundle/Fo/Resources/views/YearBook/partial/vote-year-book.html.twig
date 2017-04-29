@@ -14,3 +14,6 @@
 {% endif %}
 <p><span id="calculate-rate-{{ yearBook.id }}">{{ rateCalculated }}</span>%<br> le recommande</p>
 <p><span id="number-click-{{ yearBook.id }}">{{ yearBook.click }}</span> vues</p>
+<p class="see-comments" data-yearbookid="{{ yearBook.id }}"><< voir les avis >></p>
+
+{% include 'YearBook/modal/comment-modal.html.twig' with { 'yearBook' : yearBook } %}

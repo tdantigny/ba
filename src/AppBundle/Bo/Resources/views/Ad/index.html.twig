@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    Liste des pubs
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div>
+        <input type="submit" value="Filtrer" />
+    </div>
+    {{ form_end(form) }}
+
+    <a href="{{ path('bo_ad_add') }}">Ajouter une pub</a>
+
+    {% if pagination is not empty %}
+        <div class="count">
+            {{ pagination.getTotalItemCount }}
+        </div>
+        <table class="table">
+            <tr>
+                <th>{{ knp_pagination_sortable(pagination, 'Id', 'ad.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Titre', 'ad.title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Type', 'ad.type') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Date de début', 'ad.startDate') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Date de fin', 'ad.endDate') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'Actif', 'ad.enable') }}</th>
+            </tr>
+
+            {% for ad in pagination.items %}
+                <tr class="showCursor" onclick="document.location.href='{{ path('bo_ad_detail', { ad : ad.id }) }}'">
+                    <td>{{ ad.id }}</td>
+                    <td>{{ ad.title }}</td>
+                    <td>{{ ad.type }}</td>
+                    <td>{{ ad.startDate|date('d-m-Y') }}</td>
+                    <td>{{ ad.endDate|date('d-m-Y') }}</td>
+                    <td>
+                        {% if ad.enable %}
+                            <i class="glyphicon glyphicon-ok"></i>
+                        {% else %}
+                            <i class="glyphicon glyphicon-remove"></i>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        {# display navigation #}
+        <div class="navigation">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    {% endif %}
+{% endblock %}

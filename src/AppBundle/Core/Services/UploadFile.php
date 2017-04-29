@@ -40,7 +40,7 @@ class UploadFile
     public function updateFile(UploadedFile $file, string $type)
     {
         // Generate a unique name for the file before saving it
-        $fileName = md5(uniqid()).'.'.$file->guessExtension();
+        $fileName = $file->getFilename().'.'.$file->guessExtension();
 
         // Move the file to the directory where brochures are stored
         $file->move(

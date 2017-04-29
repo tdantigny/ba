@@ -35,7 +35,7 @@ class HoroscopeController extends Controller
         return $this->render('Horoscope/index.html.twig', [
             'horoscopes' => $listSign,
             'date' => $this->get('app_core_date')->getFrenchDate(new \DateTime()),
-            'adWallpaper' => $ad->getAdWallpaper()
+            'adWallpaper' => $ad->getWallpaper()
         ]);
     }
 
@@ -58,7 +58,7 @@ class HoroscopeController extends Controller
         return $this->render('Horoscope/byType.html.twig', [
             'horoscope' => $horoscope,
             'date' => $this->get('app_core_date')->getFrenchDate(new \DateTime()),
-            'adWallpaper' => $ad->getAdWallpaper()
+            'adWallpaper' => $ad->getWallpaper(),
         ]);
     }
 }

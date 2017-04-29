@@ -3,7 +3,7 @@
 {% block stylesheetsAdWallpaper %}
     <style type="text/css">
         .ad__wallpaper {
-            background: url('{{ adWallpaper.img }}') no-repeat center top scroll;
+            background: url('{{asset('pictures/ad/'~ adWallpaper.picture) }}') no-repeat center top scroll;
         }
     </style>
 {% endblock %}

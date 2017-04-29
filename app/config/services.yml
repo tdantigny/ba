@@ -40,7 +40,7 @@ services:
 
   app_core_horosocope_dictionnary:
       class: 'AppBundle\Core\Services\HoroscopeDictionnary'
-      arguments: [ '%url_horoscope%', '%horoscope_date%' ]
+      arguments: [ '%url_horoscope%', '%horoscope_period%' ]
 
   app_core_contact:
       class: 'AppBundle\Core\Services\Contact'
@@ -57,6 +57,7 @@ services:
           - { name: twig.extension }
   app_core_date:
       class: 'AppBundle\Core\Services\Date'
+
   app_core_ad:
       class: 'AppBundle\Core\Services\Ad'
-      arguments: [ ]
+      arguments:  [ '@doctrine.orm.entity_manager', '@app_core_upload_file' ]

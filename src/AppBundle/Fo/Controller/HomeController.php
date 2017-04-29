@@ -41,7 +41,7 @@ class HomeController extends Controller
             [
                 'guideBook' => $guideBook,
                 'horoscope' => $horoscope,
-                'adWallpaper' => $ad->getAdWallpaper()
+                'adWallpaper' => $ad->getWallpaper()
             ]
         );
     }

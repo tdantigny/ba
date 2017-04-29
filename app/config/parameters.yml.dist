@@ -22,6 +22,7 @@ parameters:
         guide_book: '%kernel.root_dir%/../web/pictures/guide_book/'
         year_book: '%kernel.root_dir%/../web/pictures/year_book/'
         paiement_method: '%kernel.root_dir%/../web/pictures/paiement_method/'
+        ad: '%kernel.root_dir%/../web/pictures/ad/'
 
     redis_dsn: 'redis://localhost'
 
@@ -38,6 +39,43 @@ parameters:
         capricorn : 'http://www.asiaflash.com/horoscope/rss_horojour_capricorne.xml'
         aquarius : 'http://www.asiaflash.com/horoscope/rss_horojour_verseau.xml'
         pisces : 'http://www.asiaflash.com/horoscope/rss_horojour_poissons.xml'
+        horoscope_period:
+            aries:
+                start: 'March 21'
+                end: 'Apr 19'
+            taurus:
+                start: 'Apr 20'
+                end: 'May 20'
+            gemini:
+                start: 'May 21'
+                end: 'Jun 21'
+            cancer:
+                start: 'Jun 22'
+                end: 'Jul 22'
+            lion:
+                start: 'Jul 23'
+                end: 'Aug 22'
+            virgin:
+                start: 'Aug 23'
+                end: 'Sep 22'
+            balance:
+                start: 'Sep 23'
+                end: 'Oct 23'
+            scorpio:
+                start: 'Oct 24'
+                end: 'Nov 22'
+            sagittarius:
+                start: 'Nov 23'
+                end: 'Dec 21'
+            capricorn:
+                start: 'Dec 22'
+                end: 'Jan 19'
+            aquarius:
+                start: 'Jan 20'
+                end: 'Feb 18'
+            pisces:
+                start: 'Feb 19'
+                end: 'March 20'
 
     mail_contact: 'contact@webeditionplanet.com'
 

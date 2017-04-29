@@ -2,50 +2,57 @@
 
 namespace AppBundle\Core\Services;
 
-use Symfony\Bundle\TwigBundle\TwigEngine;
 use AppBundle\Core\Model\AdWallpaper;
+use AppBundle\Core\Manager\Manager;
+use Doctrine\ORM\EntityManager;
+use AppBundle\Core\Entity\Ad as AdEntity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Class Ad
  * @package AppBundle\Core\Services
  * @TODO HG : récupérer information depuis la base de données, uniquement le net actif (en fonction des dates + actif)
  */
-class Ad
+class Ad extends Manager
 {
     /**
-     * @var AppBundle\Core\Model\AdWallpaper
+     * @var UploadFile
      */
-    private $adWallpaper;
+    private $uploadFile;
 
     /**
      * Ad constructor.
-     * @param TwigEngine    $twig
-     * @param \Swift_Mailer $mailer
-     * @param string        $mailContact
+     * @param EntityManager $entityManager
+     * @param UploadFile    $uploadFile
      */
-    public function __construct()
+    public function __construct(EntityManager $entityManager, UploadFile $uploadFile)
     {
-        $this->createFakeAdWallPaper();
+        parent::__construct($entityManager);
+        $this->uploadFile = $uploadFile;
     }
 
     /**
-     * Return AdWallPaper Model
+     * Create an ad
+     *
+     * @param AdEntity $ad
      */
-    public function getAdWallpaper()
+    public function created(AdEntity $ad)
     {
-        return $this->adWallpaper;
+        $fileName = $this->uploadFile->updateFile($ad->getPicture(), 'ad');
+        $ad->setPicture($fileName);
+        $this->getEntityManager()->persist($ad);
+        $this->getEntityManager()->flush($ad);
     }
 
-    private function createFakeAdWallPaper()
+    public function getWallpaper()
     {
-        $adWallPaperModel = new AdWallpaper();
-        $adWallPaperModel->setImg('/bg_pub.jpg');
-        $adWallPaperModel->setTitle('Tara voyance');
-        $adWallPaperModel->setDateEnd('2017-03-01');
-        $adWallPaperModel->setDateStart('2017-06-31');
-        $adWallPaperModel->setLink('http://www.tara-voyance.com/votre-voyance-gratuite.htm');
+        $ad = $this->getEntityManager()->getRepository('AppBundle:Ad')
+            ->getEnableWallpaper();
 
-        $this->adWallpaper = $adWallPaperModel;
+        if (!empty($ad) && is_array($ad)) {
+            return $ad[0];
+        }
+
+        return null;
     }
-
 }
