@@ -129,10 +129,10 @@ class Horoscope
         );
 
         $horoscopeModel->setPeriodStart(
-            $this->periodHoroscope[$horoscopeTitleEnglish]['start']
+            $this->periodHoroscope[$content[0][6]]['start']
         );
         $horoscopeModel->setPeriodEnd(
-            $this->periodHoroscope[$horoscopeTitleEnglish]['end']
+            $this->periodHoroscope[$content[0][6]]['end']
         );
 
         return $horoscopeModel;

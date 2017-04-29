@@ -36,11 +36,11 @@ services:
 
   app_core_horosocope:
       class: 'AppBundle\Core\Services\Horoscope'
-      arguments: [ '@app_core_horosocope_dictionnary', '@snc_redis.default', '%horoscope_period%' ]
+      arguments: [ '@app_core_horosocope_dictionnary', '@snc_redis.default', '%horoscope_date%' ]
 
   app_core_horosocope_dictionnary:
       class: 'AppBundle\Core\Services\HoroscopeDictionnary'
-      arguments: [ '%url_horoscope%', '%horoscope_period%' ]
+      arguments: [ '%url_horoscope%', '%horoscope_date%' ]
 
   app_core_contact:
       class: 'AppBundle\Core\Services\Contact'
@@ -55,7 +55,8 @@ services:
       arguments:  [ '@app_core_year_book', '@app_core_user', '@app_core_vote_year_book' ]
       tags:
           - { name: twig.extension }
-
+  app_core_date:
+      class: 'AppBundle\Core\Services\Date'
   app_core_ad:
       class: 'AppBundle\Core\Services\Ad'
       arguments: [ ]

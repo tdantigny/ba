@@ -39,46 +39,7 @@ parameters:
         aquarius : 'http://www.asiaflash.com/horoscope/rss_horojour_verseau.xml'
         pisces : 'http://www.asiaflash.com/horoscope/rss_horojour_poissons.xml'
 
-    horoscope_period:
-        aries :
-            start: 'Apr 15'
-            end: 'May 15'
-        taurus :
-            start: 'May 16'
-            end: 'Jun 15'
-        gemini :
-            start: 'Jun 16'
-            end: 'Jul 15'
-        cancer :
-            start: 'Jul 16'
-            end: 'Aug 15'
-        lion :
-            start: 'Aug 16'
-            end: 'Sep 15'
-        virgin :
-            start: 'Sep 16'
-            end: 'Oct 15'
-        balance :
-            start: 'Oct 16'
-            end: 'Nov 15'
-        scorpio :
-            start: 'Nov 16'
-            end: 'Dec 15'
-        sagittarius :
-            start: 'Dec 16'
-            end: 'Jan 14'
-        capricorn :
-            start: 'Jan 15'
-            end: 'Feb 14'
-        aquarius :
-            start: 'Feb 15'
-            end: 'March 14'
-        pisces :
-            start: 'March 15'
-            end: 'Apr 14'
-
     mail_contact: 'contact@webeditionplanet.com'
-
 
     horoscope_date:
         belier:
