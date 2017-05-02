@@ -1,0 +1,58 @@
+@import 'app/Resources/public/css/variable.less';
+
+
+section.guidebooks > p {
+    color: @secondary-color;
+    font-size: 16px;
+    text-align: center;
+    width: 70%;
+    margin: 30px auto;
+}
+
+section.guidebooks article {
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+section.guidebooks article h1 {
+    font-size: 32px;
+    font-weight: 300;
+    color: @primary-color;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+section.guidebooks article img{
+    width: 100%;
+}
+
+section.guidebook > article h2 {
+    font-size: 32px;
+    font-weight: 300;
+    color: @tertiaire-color;
+    margin-bottom: 20px;
+}
+
+section.guidebook > article > div {
+    clear:both;
+}
+
+section.guidebook > article > div > p > img{
+    @media @mobile {
+        width:100%;
+    }
+    @media @large-desktop, @tablet, @desktop {
+        width:30%;
+        margin: 30px;
+    }
+}
+
+section.guidebook > article > div > p > img.picture-float-right {
+    float:right;
+    margin: 0 0 30px 30px;
+}
+
+section.guidebook > article > div > p > img.picture-float-left {
+    float:left;
+    margin: 0 30px 30px 0;
+}

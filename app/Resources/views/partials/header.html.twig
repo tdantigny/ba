@@ -25,8 +25,8 @@
                             Horoscope
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
+                    <li{% if app.request.attributes.get('_route') == 'fo_guidebooks' or app.request.attributes.get('_route') == 'fo_guidebook' %} class="actif"{% endif %}>
+                        <a href="{{ path('fo_guidebooks') }}">
                             Guide pratique
                         </a>
                     </li>

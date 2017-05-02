@@ -40,7 +40,7 @@ services:
 
   app_core_horosocope_dictionnary:
       class: 'AppBundle\Core\Services\HoroscopeDictionnary'
-      arguments: [ '%url_horoscope%', '%horoscope_period%' ]
+      arguments: [ '%url_horoscope%', '%horoscope_date%' ]
 
   app_core_contact:
       class: 'AppBundle\Core\Services\Contact'

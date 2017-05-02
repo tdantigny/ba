@@ -168,7 +168,7 @@ h3. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulpu
         $guideBook->setId($id);
         $guideBook->setEnable(true);
         $guideBook->setTitle('Test');
-        $guideBook->setPicture('1344585.png');
+        $guideBook->setPicture('1344585.jpg');
         $guideBook->setParagraphs($paragraphs);
 
         return $guideBook;

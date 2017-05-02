@@ -17,23 +17,35 @@ use Symfony\Component\HttpFoundation\Response;
  * Class GuideBookController
  * @package AppBundle\Fo\Controller
  * @Route("/guide")
- * @Security("has_role('ROLE_ADMIN')")
  */
 class GuideBookController extends Controller
 {
     /**
-     * @Route("/{guideBook}/{title}", name="fo_guide_book")
-     * @param GuideBook $guideBook
-     * @param string    $title
-     * @return Response
+     * @Route("/", name="fo_guidebooks")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws CustomException
      */
-    public function previewAction(GuideBook $guideBook, string $title)
+    public function indexAction()
     {
-        unset($title);
-        $guideBook->setHtml(html_entity_decode($guideBook->getHtml()));
+        $guideBook = $this->get('app_core_guide_book');
 
-        return $this->render('GuideBook/preview.html.twig', [
-            'guideBook' => $guideBook,
+        return $this->render('GuideBook/index.html.twig', [
+            'guidebooks' => $guideBook->getAll(),
+        ]);
+    }
+    /**
+     * @Route("/{id}-{title}", name="fo_guidebook")
+     * @param int       $id
+     * @param string    $title
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws CustomException
+     */
+    public function byNameAction(GuideBook $guideBook, int $id, string $title)
+    {
+        $guideBook = $this->get('app_core_guide_book');
+
+        return $this->render('GuideBook/byId.html.twig', [
+            'guidebook' => $guideBook->get($id),
         ]);
     }
 }
