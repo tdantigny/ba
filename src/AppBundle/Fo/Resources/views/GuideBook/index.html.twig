@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <section class="guidebooks">
+        <h1>Guide <span>pratique</span></h1>
+
+        <p>
+            Le guide pratique vous permet de découvrir ou d'approfondir vos connaissances dans le domaine de la voyance et de l'ésotérisme en général. Choisissez un thème pour en savoir plus à ce sujet.
+        </p>
+
+        <div class="row">
+        {% for guidebook in guidebooks %}
+
+            <article class="col-lg-4 col-md-4 col-sm-6 col-xs-12" style="overflow: hidden;">
+                <a href="{{ path('fo_guidebook', { title : guidebook.title, id : guidebook.id }) }}">
+                    <h1>{{ guidebook.title }}</h1>
+                    <img src="{{ directory_pictures.guidebook }}{{ guidebook.picture }}" alt="{{ guidebook.title }}" />
+                </a>
+            </article>
+
+        {% endfor %}
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+    <section class="guidebook">
+        <h1>{{ guidebook.title|capitalize }}</h1>
+
+        <article>
+            {% for paragraph in guidebook.paragraphs %}
+            <div>
+                <h2>{{ paragraph.title | raw }}</h2>
+                <p>
+                    {% if paragraph.picture is defined and paragraph.picture != null and paragraph.picturePosition is defined and (paragraph.picturePosition == 'right' or paragraph.picturePosition == 'left') %}
+                        <img src="{{ directory_pictures.guidebook }}{{ paragraph.picture | raw }}" class="picture-float-{{ paragraph.picturePosition }}" alt="{{ paragraph.title | raw }}" />
+                    {% endif %}
+                    {{ paragraph.content | raw }}
+                </p>
+            </div>
+            {% endfor %}
+        </article>
+    </section>
+
+{% endblock %}
