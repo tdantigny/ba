@@ -1,23 +1,21 @@
 <section class="partial__guideBook">
     <div>
-        <img src="/pictures/guide_book/{{ guideBook.picture }}" alt="{{ guideBook.title }}" />
+        <img src="{{ directory_pictures.guidebook }}{{ guidebook.picture }}" alt="{{ guidebook.title }}" />
     </div>
 
     <article class="partial__guideBook__article">
         <header>
             <h4>aujourd'hui</h4>
             <hr />
-            <h3>{{ guideBook.title }}</h3>
+            <h3>{{ guidebook.title }}</h3>
         </header>
 
         <p>
-        {% autoescape %}
-            {{ guideBook.html | raw | striptags  }}
-        {% endautoescape %}
+            {{ guidebook.paragraphs.0.content|slice(0, 250) ~ '...'  }}
         </p>
 
         <footer>
-            <a class="button1" title="voir {{ guideBook.title }}" href="{{ path('fo_guidebook', { 'id' : guideBook.id, 'title' : guideBook.title }) }}">consulter</a>
+            <a class="button button-primary" title="voir {{ guidebook.title }}" href="{{ path('fo_guidebook', { 'id' : guidebook.id, 'title' : guidebook.title }) }}">consulter</a>
         </footer>
     </article>
 </section>

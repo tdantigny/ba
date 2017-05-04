@@ -87,12 +87,10 @@
     background-repeat: no-repeat;
     overflow: hidden;
     position: relative;
-    @media @tablet, @desktop, @large-desktop {
-        height : 300px;
-    }
 }
 
 .partial__guideBook > div {
+    width: 100%;
     @media @mobile {
         display:none;
     }
@@ -110,7 +108,7 @@
 .partial__guideBook > div > img {
     width:100%;
     @media @tablet, @desktop, @large-desktop {
-        height : 300px;
+        //height : 426px;
     }
 }
 
@@ -121,7 +119,6 @@
     @media @tablet, @desktop, @large-desktop {
         position: absolute;
         width: 360px;
-        height:250px;
         padding: 25px;
     }
 }
@@ -141,9 +138,6 @@
 }
 
 .partial__guideBook > article > p {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    height:60px;
     text-center: center;
     margin-bottom: 20px;
 }

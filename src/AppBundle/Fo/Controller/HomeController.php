@@ -22,7 +22,7 @@ class HomeController extends Controller
     {
         $this->get('login_success_handler');
 
-        $guideBook = $this->get('app_core_guide_book')->getRandomOne();
+        $guidebook = $this->get('app_core_guide_book')->getRandomOne();
         $ad = $this->get('app_core_ad');
 
         //We check if the current user is connected
@@ -39,7 +39,7 @@ class HomeController extends Controller
 
         return $this->render('Home/index.html.twig',
             [
-                'guideBook' => $guideBook,
+                'guidebook' => $guidebook,
                 'horoscope' => $horoscope,
                 'adWallpaper' => $ad->getWallpaper()
             ]

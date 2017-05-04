@@ -55,6 +55,13 @@ services:
       arguments:  [ '@app_core_year_book', '@app_core_user', '@app_core_vote_year_book' ]
       tags:
           - { name: twig.extension }
+
+  app_fo_format_text_extension:
+      class: 'AppBundle\Fo\Twig\FormatTextExtension'
+      arguments:  []
+      tags:
+          - { name: twig.extension }
+
   app_core_date:
       class: 'AppBundle\Core\Services\Date'
 

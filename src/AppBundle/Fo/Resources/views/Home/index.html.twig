@@ -1,10 +1,9 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    {% if guideBook is not empty %}
-        {% include 'Home/partials/guide-book.html.twig' with { 'guideBook' : guideBook } %}
+    {% if guidebook is not empty %}
+        {% include 'Home/partials/guide-book.html.twig' with { 'guidebook' : guidebook } %}
     {% endif %}
 
-
-    {% include 'Home/partials/registration-newsletter.html.twig' with { 'guideBook' : guideBook } %}
+    {% include 'Home/partials/registration-newsletter.html.twig' %}
 {% endblock %}
